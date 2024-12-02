@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Source+Serif+Pro:400,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/fonts/icomoon/style.css}">
+    <link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/main.css}" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400,700&amp;display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+    <!-- Style -->
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/form-style.css}">
+    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
+    <script th:src="@{/js/jquery-3.3.1.min.js}"></script>
+    <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+    <title>Ticket CTR</title>
+    <style>/* Reset mặc định */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Toàn trang */
+body {
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+    background-color: #f4f4f4;
+    line-height: 1.6;
+}
+
+/* Tiêu đề */
+h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #222;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid #e1e1e1;
+    padding-bottom: 0.5rem;
+}
+
+/* Form */
+form {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    margin-top: 1.5rem;
+}
+
+/* Nhãn và trường nhập */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #555;
+}
+
+.form-control, .form-control-file {
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    padding: 0.75rem 1.25rem;
+    font-size: 1rem;
+}
+
+.form-control-file {
+    border: none;
+}
+
+.form-control:focus, .form-control-file:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.25);
+}
+
+/* Nút bấm */
+.btn-primary {
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #fff;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+/* Hiển thị thông báo lỗi */
+.swal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.swal-modal {
+    background: #fff;
+    border-radius: 8px;
+    padding: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.swal-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.swal-button {
+    background: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.swal-button:hover {
+    background: #0056b3;
+}
+
+/* Thay đổi giao diện khi chọn file */
+input[type="file"] {
+    padding: 0;
+    border: none;
+}
+
+/* Tên file đã chọn */
+.form-text {
+    font-size: 0.875rem;
+    color: #666;
+    margin-top: 0.25rem;
+}
+</style>
+</head>
+<body>
+    <th:block lang="vi" th:include="fragments/admin/navigation :: navigation"></th:block>
+    <div class="container py-5">
+        <h2 class="mb-4">Update Schedule</h2>
+        <form method="POST" id="contactForm" name="contactForm" class="contactForm" 
+              th:action="@{/admin/movies/update}" th:object="${movie}">
+            <input th:field="*{id}" type="hidden"/>
+            <div class="form-group">
+                <label for="movieName">Movie Name</label>
+                <input type="text" th:field="*{name}" class="form-control" id="movieName" placeholder="Enter movie name" required>
+            </div>
+            
+    <div class="form-group">
+    <label for="smallImageURl">Poster</label>
+    <input type="file" th:field="*{smallImageURl}" class="form-control-file" id="smallImageURl" required>
+    <small id="currentFileName" class="form-text text-muted"></small>
+</div>
+
+            <div class="form-group">
+                <label for="detailedDescription">Detail Description</label>
+                <input type="text" th:field="*{longDescription}" class="form-control" id="detailedDescription" placeholder="Enter detailed description"required>
+            </div>
+            <div class="form-group">
+                <label for="briefDescription">Short Description</label>
+                <input type="text" th:field="*{shortDescription}" class="form-control" id="briefDescription" placeholder="Enter brief description"required>
+            </div>
+
+            <div class="form-group">
+                <label for="director">Director</label>
+                <input type="text" th:field="*{director}" class="form-control" id="director" placeholder="Enter director's name"required>
+            </div>
+            <div class="form-group">
+                <label for="performer">Actor</label>
+                <input type="text" th:field="*{actors}" class="form-control" id="performer" placeholder="Enter performers"required>
+            </div>
+            <div class="form-group">
+                <label for="category">Genre</label>
+                <input type="text" th:field="*{categories}" class="form-control" id="category" placeholder="Enter category"required>
+            </div>
+            <div class="form-group">
+                <label for="releaseDate">Release Date</label>
+                <input type="date" th:field="*{releaseDate}" class="form-control" id="releaseDate"required>
+            </div>
+             <div class="form-group">
+                <label for="movieDuration">Movie Duration (minutes)</label>
+                <input type="number" th:field="*{duration}" class="form-control" id="movieDuration" placeholder="Enter movie duration" min="45" max="300" required>
+                <small class="form-text text-muted">Enter a duration between 45 and 300 minutes.</small>
+            </div>
+            <div class="form-group">
+                <label for="trailer">Trailer URL</label>
+                <input type="url" th:field="*{trailerURL}" class="form-control" id="trailer" placeholder="Enter trailer URL"required>
+            </div>
+                <div class="form-group">
+                <label for="language">Language</label>
+                <input type="text" th:field="*{language}" class="form-control" id="language" placeholder="Enter language"required>
+            </div>
+             <div class="form-group">
+                <label for="ageLimit">Age Limit</label>
+                <select th:field="*{rated}" class="form-control" id="ageLimit"required>
+                    <option value="3-99">P - MOVIES FOR ALL AGES</option>
+                    <option value="12-99">C13 - NOT FOR CHILDREN UNDER 13</option>
+                    <option value="16-99">C16 - NOT FOR CHILDREN UNDER 16</option>
+                    <option value="18-99">C18 - NOT FOR CHILDREN UNDER 18</option>
+                </select>
+            </div>
+                     <div class="form-group">
+                        	<input id="check-showing" name="checkShowing" type="checkbox" th:checked="${movie.isShowing==1}" 
+                        	data-toggle="toggle" data-onstyle="primary" data-offstyle="secondary"
+                        	data-on="Now Showing" data-off="Coming Soon">
+							</div>
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+           <form id="uploadImageForm" th:action="@{/images/upload}" method="post" enctype="multipart/form-data" style="display: none;">
+            <input type="file" name="file" accept="image/*" id="uploadSmallImageURl"/>
+            <button type="submit">Upload</button>
+        </form>
+        <div id="error--login" class="swal-overlay" tabindex="-1">
+            <div class="swal-modal" role="dialog" aria-modal="true">
+                <div class="swal-icon swal-icon--error">
+                    <div class="swal-icon--error__x-mark">
+                        <span class="swal-icon--error__line swal-icon--error__line--left"></span>
+                        <span class="swal-icon--error__line swal-icon--error__line--right"></span>
+                    </div>
+                </div>
+                <div class="swal-title">Do not leave data blank</div>
+                <div class="swal-footer">
+                    <div class="swal-button-container">
+                        <button class="swal-button swal-button--confirm">OK</button>
+                        <div class="swal-button__loader"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  <script th:inline="javascript">
+    document.addEventListener('DOMContentLoaded', function () {
+        const contactForm = document.getElementById('contactForm');
+        const uploadImageForm = document.getElementById('uploadImageForm');
+        const smallImageURlInput = document.getElementById('smallImageURl');
+        const uploadSmallImageURlInput = document.getElementById('uploadSmallImageURl');
+        const errorOverlay = document.getElementById('error--login');
+        const currentFileName = document.getElementById('currentFileName');
+        const requiredFields = contactForm.querySelectorAll('[required]');
+
+        function showError(message) {
+            errorOverlay.querySelector('.swal-title').textContent = message;
+            errorOverlay.style.display = 'block';
+        }
+
+        function hideError() {
+            errorOverlay.style.display = 'none';
+        }
+
+        contactForm.addEventListener('submit', function (event) {
+            let allFieldsFilled = true;
+
+            requiredFields.forEach(field => {
+                if (!field.value.trim()) { // Use trim() to remove extra spaces
+                    allFieldsFilled = false;
+                    field.classList.add('is-invalid'); // Add Bootstrap invalid class
+                } else {
+                    field.classList.remove('is-invalid'); // Remove Bootstrap invalid class
+                }
+            });
+
+            if (!allFieldsFilled) {
+                event.preventDefault(); // Prevent form submission
+                showError('Do not leave data blank');
+                return; // Exit the function to prevent further actions
+            }
+
+            hideError(); // Hide error message if all fields are filled
+
+            if (smallImageURlInput.files.length > 0) {
+                const imageFormData = new FormData();
+                imageFormData.append('file', smallImageURlInput.files[0]);
+
+                fetch(uploadImageForm.action, {
+                    method: 'POST',
+                    body: imageFormData
+                })
+                .then(response => {
+                    if (response.headers.get('content-type')?.includes('application/json')) {
+                        return response.json();
+                    } else {
+                        return response.text();
+                    }
+                })
+                .then(data => {
+                    console.log('Image upload success:', data);
+                    contactForm.submit(); // Submit the form after image upload
+                })
+                .catch(error => {
+                    console.error('Error uploading image:', error);
+                    showError('Error uploading image');
+                });
+
+            } else {
+                contactForm.submit(); // Submit the form immediately if no image
+            }
+        });
+
+        // Display the selected file name
+        smallImageURlInput.addEventListener('change', function() {
+            const file = smallImageURlInput.files[0];
+            if (file) {
+                currentFileName.textContent = 'Current file: ' + file.name;
+            } else {
+                currentFileName.textContent = ''; // Clear file name if no file is selected
+            }
+        });
+
+        $(document).ready(function() {
+            var currentSmallImageURlName = /*[[${currentSmallImageURlName}]]*/ '';
+            if (currentSmallImageURlName) {
+                $('#currentFileName').text('Current file: ' + currentSmallImageURlName);
+            }
+        });
+    });
+</script>
+
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+    <script th:src="@{/js/popper.min.js}"></script>
+    <script th:src="@{/js/main.js}"></script>
+</body>
+</html>
