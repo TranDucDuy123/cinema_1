@@ -1,4 +1,4 @@
-<!DOCTYPE html>dd
+<!DOCTYPE html>
 <html lang="vi" xmlns:th="http://www.thymeleaf.org">
 <head>
     <link th:href="@{/css/main.css}" rel="stylesheet"/>
@@ -14,7 +14,7 @@
     <link href="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-    <title>CTR Ticket</title>
+    <title>AP Movie</title>
     <link th:href="@{/css/2.fd207d57.chunk.css}" rel="stylesheet"/>
     <link th:href="@{/css/main.ffa69c8e.chunk.css}" rel="stylesheet"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
@@ -50,17 +50,17 @@
                     <div class="bookSlot__content" style="overflow-x: scroll;">
                         <div class="theater__info d-flex justify-content-between">
                             <div class="theater__img d-flex bg-light">
-                                
+                                <img alt="hinhanh" src="http://movie0706.cybersoft.edu.vn/hinhanh/john-wick-iiisssssssssxxxssssssssssssssssssss_gp09.jpg">
                                 <div class="theater__name">
                                         <span class="name">
                                             <span class="subname" th:text="${schedule.room.name}"></span>
                                         </span>
-                                    <p class="showtime" th:text="'Show date: '+${schedule.startDate}"></p>
-                                    <p class="showtime" th:text="'Show Time: '+${schedule.startTime}"></p>
+                                    <p class="showtime" th:text="'Ngày chiếu: '+${schedule.startDate}"></p>
+                                    <p class="showtime" th:text="'Giờ chiếu: '+${schedule.startTime}"></p>
                                 </div>
                             </div>
                             <div class="timeKeepSlot">
-                                <p class="title__text" style="font-size: 14px;">Countdown to the end of the showtimes</p><span class="time" style="font-size: 22px;"></span>
+                                <p class="title__text" style="font-size: 14px;">Đếm ngược kết thúc lịch chiếu</p><span class="time" style="font-size: 22px;"></span>
                             </div>
                         </div>
                         <div class="chooseSlot" style="width: 850px">
@@ -80,19 +80,19 @@
                             </div>
                             <div class="slot__detail row">
                                 <div class="col-md-3 col-sm-6 col-xs-6">
-                                    <i class="fa fa-couch item--picking"></i><span class="slot__text">Selected chair</span>
+                                    <i class="fa fa-couch item--picking"></i><span class="slot__text">Ghế đang chọn</span>
                                 </div>
                                 <div class="col-md-2 col-sm-6 col-xs-6">
-                                    <i class="fa fa-couch item--picked"></i><span class="slot__text">Seat occupied</span>
+                                    <i class="fa fa-couch item--picked"></i><span class="slot__text">Ghế có người</span>
                                 </div>
                                 <div class="col-md-2 col-sm-6 col-xs-6">
-                                    <i class="fa fa-couch item--regular"></i><span class="slot__text">Regular Seats</span>
+                                    <i class="fa fa-couch item--regular"></i><span class="slot__text">Ghế Thường</span>
                                 </div>
                                 <div class="col-md-2 col-sm-6 col-xs-6">
-                                    <i class="fa fa-couch item--vip"></i><span class="slot__text">VIP Seats</span>
+                                    <i class="fa fa-couch item--vip"></i><span class="slot__text">Ghế Vip</span>
                                 </div>
                                 <div class="col-md-3 col-sm-6 col-xs-6">
-                                    <i class="fa fa-couch item--checked"></i><span class="slot__text">Your chair</span>
+                                    <i class="fa fa-couch item--checked"></i><span class="slot__text">Ghế của bạn</span>
                                 </div>
                             </div>
                         </div>
@@ -101,7 +101,7 @@
             </div>
             <div class="checkOut__right col-md-3 col-sm-12">
                 <div class="checkout__form">
-                    <div class="total__price"><span class="price" data-price="0">0?</span></div>
+                    <div class="total__price"><span class="price" data-price="0">0₫</span></div>
                     <div class="film__info">
                         <span class="film__age--C" th:text="${schedule.room.name}"></span>
                         <span class="film__name" th:text="${schedule.movie.name}"></span>
@@ -110,106 +110,103 @@
                         <p class="film__address" th:text="${schedule.branch.diaChi}"></p>
                     </div>
                     <div class="count__slot">
-                        <div>Selected Seat: </div>
+                        <div>Ghế đã chọn: </div>
                         <div class="slot"></div>
                     </div>
-                    <!--                    Ho ng Add-->
+                    <!--                    Hoàng Add-->
                     <div class="discountForm d-flex justify-content-between">
                         <div class="discountForm__content">
-                            <label class="label__name">Discount code</label>
+                            <label class="label__name">Mã giảm giá</label>
                             <input type="text" name="code" id="txtDiscountCode" class="form-control d-inline"
-                                   placeholder="Enter here...">
+                                   placeholder="Nhập tại đây...">
                         </div>
-                        <button id="btnCheckCode" class="btn mb-2">Apply</button>
+                        <button id="btnCheckCode" class="btn mb-2">Áp dụng</button>
                     </div>
                     <div class="payForm">
-                        <a class="pay__link" href="/#"><span class="title__text">Payment method</span>
-                            <p class="text__notification">Please select a seat to display the appropriate payment method.</p>
+                        <a class="pay__link" href="/#"><span class="title__text">Hình thức thanh toán</span>
+                            <p class="text__notification">Vui lòng chọn ghế để hiển thị phương thức thanh toán phù hợp.</p>
                         </a>
                     </div>
                 </div>
                 <div class="textNotification text-center">
-                    <i class="fa fa-info-circle text-danger mr-1"></i><span class="noti__text">Purchased tickets cannot be exchanged or refunded. Ticket codes will be sent via SMS.
-                            <span class="noti__link">ZMS</span> (Zalo message) v  <span class="noti__link">Email</span>entered.</span>
+                    <i class="fa fa-info-circle text-danger mr-1"></i><span class="noti__text">Vé đã mua không thể đổi hoặc hoàn tiền Mã vé sẽ được gửi qua tin nhắn
+                            <span class="noti__link">ZMS</span> (tin nhắn Zalo) và <span class="noti__link">Email</span> đã nhập. </span>
                 </div>
-                <div id="btnBook" class="btnBook" data-toggle="modal" data-target="#CreditModal">Pay</div>
+                <div id="btnBook" class="btnBook" data-toggle="modal" data-target="#CreditModal">Thanh toán</div>
                 <div>
                     <div class="CreditModal modal fade bd-example-modal-lg" id="CreditModal" tabindex="-1"
                          role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
                         <div class="modal-dialog modal-lg" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title">Pay</h5><button type="button" class="close"
+                                    <h5 class="modal-title">Thanh toán</h5><button type="button" class="close"
                                                                                    data-dismiss="modal" aria-label="Close"><span
-                                        aria-hidden="true"> </span></button>
+                                        aria-hidden="true">×</span></button>
                                 </div>
                                 <div class="modal-body">
-                                            <div id="PaymentForm">
-                                                <div class="row">
-                                                    <div class="credit-card col-md-6 col-sm-12 mb-2">
-                                                        <div class="rccs">
-                                                            <div class="rccs__card rccs__card--unknown">
-                                                                <div class="rccs__card--front">
-                                                                    <div class="rccs__card__background"></div>
-                                                                    <div class="rccs__issuer"></div>
-                                                                    <div class="rccs__cvc__front"></div>
-                                                                    <div class="rccs__number">                   </div>
-                                                                    <div class="rccs__name">YOUR NAME HERE</div>
-                                                                    <div class="rccs__expiry">
-                                                                        <div class="rccs__expiry__valid">valid thru</div>
-                                                                        <div class="rccs__expiry__value">  /  </div>
-                                                                    </div>
-                                                                    <div class="rccs__chip"></div>
-                                                                </div>
-                                                                <div class="rccs__card--back">
-                                                                    <div class="rccs__card__background"></div>
-                                                                    <div class="rccs__stripe"></div>
-                                                                    <div class="rccs__signature"></div>
-                                                                    <div class="rccs__cvc"></div>
-                                                                    <div class="rccs__issuer"></div>
-                                                                </div>
+                                    <div id="PaymentForm">
+                                        <div class="row">
+                                            <div class="credit-card col-md-6 col-sm-12 mb-2">
+                                                <div class="rccs">
+                                                    <div class="rccs__card rccs__card--unknown">
+                                                        <div class="rccs__card--front">
+                                                            <div class="rccs__card__background"></div>
+                                                            <div class="rccs__issuer"></div>
+                                                            <div class="rccs__cvc__front"></div>
+                                                            <div class="rccs__number">•••• •••• •••• ••••</div>
+                                                            <div class="rccs__name">YOUR NAME HERE</div>
+                                                            <div class="rccs__expiry">
+                                                                <div class="rccs__expiry__valid">valid thru</div>
+                                                                <div class="rccs__expiry__value">••/••</div>
                                                             </div>
+                                                            <div class="rccs__chip"></div>
                                                         </div>
-                                                    </div>
-                                                    <div class="info-card col-md-6 col-sm-12">
-                                                        <form class="info-form" th:action="@{/booking}" method="post" onsubmit="return validateForm()">
-                                                            <div class="textb">
-                                                                <input type="tel" id="cardNumber" name="number" class="w-100" oninput="formatCardNumber()" required>
-                                                                <div class="placeholder">Card Number</div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="col-6" style="padding-right: 0px;">
-                                                                    <div class="textb">
-                                                                        <input type="tel" id="expiry" name="expiry" required>
-                                                                        <div class="placeholder">Valid</div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-6">
-                                                                    <div class="textb">
-                                                                        <input type="tel" id="cvc" name="cvc" required>
-                                                                        <div class="placeholder">CVC</div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="textb">
-                                                                <input type="text" id="name" name="name" required>
-                                                                <div class="placeholder">Name</div>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button id="btn-booking" type="submit" class="btn-style draw-border">Pay</button>
-                                </div>
-                                                        </form>
+                                                        <div class="rccs__card--back">
+                                                            <div class="rccs__card__background"></div>
+                                                            <div class="rccs__stripe"></div>
+                                                            <div class="rccs__signature"></div>
+                                                            <div class="rccs__cvc"></div>
+                                                            <div class="rccs__issuer"></div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="info-card col-md-6 col-sm-12">
+                                                <form class="info-form" th:action="@{/booking}" method="post">
+                                                    <div class="textb">
+                                                        <input type="tel" name="number" class="w-100">
+                                                        <div class="placeholder">Card Number</div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-6" style="padding-right: 0px;">
+                                                            <div class="textb">
+                                                                <input type="tel" name="expiry">
+                                                                <div class="placeholder">Valid</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <div class="textb">
+                                                                <input type="tel" name="cvc">
+                                                                <div class="placeholder">CVC</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="textb">
+                                                        <input type="text" name="name">
+                                                        <div class="placeholder">Name</div>
+                                                    </div>
+                                                </form>
+                                            </div>
                                         </div>
-
                                     </div>
                                 </div>
+                                <div class="modal-footer"><button id="btn-booking" type="button" class="btn-style draw-border">Đặt vé</button></div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
     </div>
     <footer lang="vi" class="container" th:include="fragments/footer :: footer"/>
 </div>
@@ -221,7 +218,7 @@
             <div class="swal-icon--success__ring"></div>
             <div class="swal-icon--success__hide-corners"></div>
         </div>
-        <div class="swal-title">Payment successful</div>
+        <div class="swal-title">Thanh toán thành công</div>
         <div class="swal-text" style=""></div>
         <div class="swal-footer">
             <div class="swal-button-container">
@@ -243,7 +240,7 @@
                 <span class="swal-icon--error__line swal-icon--error__line--right"></span>
             </div>
         </div>
-        <div id="text-error" class="swal-title">Someone quickly booked your spot</div>
+        <div id="text-error" class="swal-title">Có người nhanh tay đặt chỗ của bạn</div>
         <div class="swal-footer">
             <div class="swal-button-container">
                 <button class="swal-button swal-button--confirm">OK</button>
@@ -264,7 +261,7 @@
                 <span class="swal-icon--error__line swal-icon--error__line--right"></span>
             </div>
         </div>
-        <div class="swal-title">Showtime is closed, please choose another showtime!</div>
+        <div class="swal-title">Lịch chiếu đã đóng, vui lòng chọn lịch chiếu khác!</div>
         <div class="swal-footer">
             <div class="swal-button-container">
                 <button id="notify-error" class="swal-button swal-button--confirm">OK</button>
@@ -290,210 +287,321 @@
         crossorigin="anonymous"></script>
 <script src="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.js"></script>
 <script th:inline="javascript">
-$(document).ready(function () {
-    dataParameter = []
-    const price = $(".price");
-    // Hoang Add
-    // X? l  khi nh?n n t " p d?ng" cho m  gi?m gi 
-    $("#btnCheckCode").click(function () {
-        const discountCode = $("#txtDiscountCode").val().trim();
-        if (discountCode === "") {
-            alert("Please enter coupon code");
-            return;
-        }
+    $(document).ready(function () {
+        let isDiscountApplied = false; // Kiểm tra xem mã giảm giá đã được áp dụng hay chưa
+        let currentDiscountCode = "";  // Lưu mã giảm giá hiện tại
+        dataParameter = []
+        const price = $(".price");
 
-        // G?i API ki?m tra m  gi?m gi 
-        $.ajax({
-            type: "GET",
-            url: "http://localhost:8080/api/admin/discounts/by-code",
-            data: {code: discountCode},
-            success: function (response) {
-                const discount = response.result;
-                if (discount.isActive) {
-                    // T nh to n ti?n sau khi  p d?ng gi?m gi 
-                    const currentPrice = Number(price.data("price"));
-                    const discountAmount = currentPrice * (discount.percentage / 100);
-                    const newPrice = currentPrice - discountAmount;
+        // Xử lý khi nhấn nút "Áp dụng" cho mã giảm giá
+        $("#btnCheckCode").click(function () {
+            const discountCode = $("#txtDiscountCode").val().trim();
 
-                    // C?p nh?t gi  hi?n th?
-                    price.text(newPrice.toLocaleString('en-US', {style: 'currency', currency: 'VND'}));
-                    price.data("price", newPrice);
-
-                    alert("Coupon code applied successfully" + discountAmount.toLocaleString('en-US', {style: 'currency', currency: 'VND'}));
-                } else {
-                    alert("Coupon code is not valid.");
-                }
-            },
-            error: function () {
-                alert("Coupon code invalid");
+            // Kiểm tra nếu mã giảm giá đã được áp dụng
+            if (isDiscountApplied) {
+                alert("Mã giảm giá đã được áp dụng. Bạn không thể áp dụng thêm mã khác.");
+                return;
             }
+
+            if (discountCode === "") {
+                alert("Vui lòng nhập mã giảm giá.");
+                return;
+            }
+
+            // Gọi API kiểm tra mã giảm giá
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:8080/api/admin/discounts/by-code",
+                data: { code: discountCode },
+                success: function (response) {
+                    const discount = response.result;
+                    if (discount.isActive) {
+                        // Tính toán tiền sau khi áp dụng giảm giá
+                        const currentPrice = Number(price.data("price"));
+                        const discountAmount = currentPrice * (discount.percentage / 100);
+                        const newPrice = currentPrice - discountAmount;
+
+                        // Cập nhật giá hiển thị
+                        price.text(newPrice.toLocaleString('en-US', { style: 'currency', currency: 'VND' }));
+                        price.data("price", newPrice);
+
+                        // Đặt trạng thái đã áp dụng mã giảm giá
+                        isDiscountApplied = true;
+                        currentDiscountCode = discountCode;
+
+                        alert("Mã giảm giá áp dụng thành công! Số tiền được giảm: " + discountAmount.toLocaleString('en-US', { style: 'currency', currency: 'VND' }));
+                    } else {
+                        alert("Mã giảm giá này không còn hiệu lực.");
+                    }
+                },
+                error: function () {
+                    alert("Mã giảm giá không hợp lệ.");
+                }
+            });
         });
-    });
-  // Seat selection logic
-        $(".slot__item").click(function() {
+
+        // Xử lý sự kiện click ghế
+        $(".slot__item").click(function () {
             const priceSeat = Number($(this).data("price"));
             const codeSeat = $(this).data("seat");
             const seatId = $(this).data("seatId");
-            if (!$(this).hasClass("item--picked") && !$(this).hasClass("item--checked")) {
+
+            if (!$(this).hasClass("item--picked") && !$(this).hasClass("item--checked"))
                 if ($(this).hasClass("item--picking")) {
                     $(this).removeClass("item--picking");
-                    let current = Number(price.data("price") - priceSeat);
+                    current = Number(price.data("price") - priceSeat)
                     price.text(current.toLocaleString('en-US', { style: 'currency', currency: 'VND' }));
-                    price.data("price", current);
-                    $(".mr-2").each(function(index, seat) {
-                        if (seat.textContent == "Chair: " + codeSeat + ",") {
-                            seat.remove();
+                    price.data("price", current)
+                    $.each($(".mr-2"), function (index, seat) {
+                        if (seat.textContent === "Ghế: " + codeSeat + ",") {
+                            seat.remove()
                         }
-                    });
+                    })
                     dataParameter.splice(dataParameter.indexOf(seatId), 1);
                 } else {
                     $(this).addClass("item--picking");
-                    let current = Number(price.data("price") + priceSeat);
+                    current = Number(price.data("price") + priceSeat)
                     price.text(current.toLocaleString('en-US', { style: 'currency', currency: 'VND' }));
-                    price.data("price", current);
-                    $(".slot").append('<span class="mr-2">Gh?: ' + codeSeat + ',</span>');
-                    dataParameter.push(seatId);
+                    price.data("price", current)
+                    $(".slot").append('<span class="mr-2">Ghế: ' + codeSeat + ',</span>')
+                    dataParameter.push(seatId)
                 }
-            }
         });
 
-        // Timer logic
-        var clock = setInterval(function() {
+        // Xử lý thời gian đếm ngược
+        var clock = setInterval(function () {
             $('.time').text(remainingTime());
             if (remainingTime() == null) {
                 clearInterval(clock);
-                $("#error-time").addClass("swal-overlay--show-modal");
+                $("#error-time").addClass("swal-overlay--show-modal")
             }
         }, 1000);
 
-        // Handle form submission
-        $(".info-form").submit(function(event) {
-            event.preventDefault(); // Prevent default form submission
-
-            if (!validateForm()) {
-                return; // Stop the process if the form is invalid
-            }
-
-            if (dataParameter.length != 0) {
+        // Xử lý khi nhấn nút Đặt vé
+        $("#btn-booking").click(function () {
+            if (dataParameter.length !== 0) {
                 var json = JSON.stringify({
                     "scheduleId": [[${schedule.id}]],
                     "userId": [[${session.jwtResponse.id}]],
-                    "listSeatIds": dataParameter
+                    "listSeatIds": dataParameter,
+                    "discountCode": currentDiscountCode // Thêm mã giảm giá vào request
                 });
+
                 $.ajax({
                     type: "POST",
-                    url: "/bill/create-new-bill",
+                    url: "http://localhost:8080/api/bills/create-new-bill",
                     headers: { "Authorization": "Bearer " + [[${session.jwtResponse.accessToken}]] },
                     data: json,
                     contentType: "application/json; charset=utf-8",
-                    success: function(data) {
-                        // Change status of seat
+                    success: function (data) {
+                        // Đổi trạng thái của ghế
                         $(".item--picking").addClass("item--checked");
                         $(".item--picking").removeClass("item--picking");
+
                         // Reset bill
                         $(".slot").empty();
                         price.data("price", "0");
-                        let current = 0;
+                        current = 0;
                         price.text(current.toLocaleString('en-US', { style: 'currency', currency: 'VND' }));
-                        // Close all modal check-out
+
+                        // Đóng các modal checkout
                         $('#CreditModal').trigger('click');
-                        // Show notify
+
+                        // Hiển thị thông báo thành công
                         $("#success").addClass("swal-overlay--show-modal");
                         dataParameter = [];
+
+                        // Reset trạng thái mã giảm giá
+                        isDiscountApplied = false;
+                        currentDiscountCode = "";
                     },
-                    error: function(e) {
+                    error: function (e) {
                         $("#text-error").html(e.responseText);
                         $("#error").addClass("swal-overlay--show-modal");
-                        $("button").click(function(e) {
+                        $("button").click(function (e) {
                             location.reload(true);
                         });
                     }
                 });
             } else {
-                $("#text-error").html("You have not selected a seat!");
+                $("#text-error").html("Bạn chưa chọn chỗ ngồi!");
                 $("#error").addClass("swal-overlay--show-modal");
             }
         });
 
-        // Close notification
-        $(".notify").click(function(e) {
+        // Đóng thông báo
+        $(".notify").click(function (e) {
             if (remainingTime() != null)
                 $(this).removeClass("swal-overlay--show-modal");
         });
-        $("#notify-error").click(function() {
+
+        $("#notify-error").click(function () {
             window.location.href = '/';
         });
     });
 
     function remainingTime() {
         const today = new Date();
-        const dateSchedule = new Date([[${schedule.startDate} + ' ' + ${schedule.startTime}]]);
-        let seconds = Math.floor((dateSchedule - today) / 1000);
+        const dateSchedule = new Date([[${schedule.startDate}+' '+${schedule.startTime}]]);
+        seconds = Math.floor((dateSchedule - today) / 1000);
         if (seconds > 0) {
-            let h = Math.floor(seconds / 3600);
-            let m = Math.floor((seconds % 3600) / 60);
-            let s = seconds - h * 3600 - m * 60;
-            return h + " Hour " + m + " minute " + s + " second ";
+            var h = Math.floor(seconds / 3600);
+            var m = Math.floor((seconds % 3600) / 60);
+            var s = seconds - h * 3600 - m * 60;
         } else {
-            return null;
+            return null
         }
+        return h + " giờ " + m + " phút " + s + " giây ";
     }
 
-    function formatCardNumber() {
-        const cardNumberInput = document.getElementById('cardNumber');
-        let cardNumber = cardNumberInput.value.replace(/\s+/g, ''); // Remove any existing spaces
-        cardNumber = cardNumber.slice(0, 16); // Limit input to 16 digits
-        if (cardNumber.length > 0) {
-            cardNumber = cardNumber.match(/.{1,4}/g).join(' '); // Insert space every 4 digits
-        }
-            cardNumberInput.value = cardNumber;
-        }
-        function validateForm() {
-        const cardNumber = document.getElementById('cardNumber').value.replace(/\s+/g, ''); // Remove spaces for validation
-        const expiry = document.getElementById('expiry').value;
-        const cvc = document.getElementById('cvc').value;
-        const name = document.getElementById('name').value;
-        const cardNumberRegex = /^[0-9]{13,16}$/; // Basic validation for card number length (excluding spaces)
-        const expiryRegex = /^(0[1-9]|1[0-2])\/\d{2}$/; // MM/YY format
-        const cvcRegex = /^[0-9]{3,4}$/; // 3 or 4 digit CVC code
-
-        // Validate card number
-        if (!cardNumberRegex.test(cardNumber)) {
-            alert("Please enter a valid card number.");
-            return false;
-        }
-
-        // Validate expiry format
-        if (!expiryRegex.test(expiry)) {
-            alert("Please enter a valid expiry date (MM/YY).");
-            return false;
-        }
-
-        // Check if expiry date is in the future
-        const [enteredMonth, enteredYear] = expiry.split('/').map(Number); // Split MM/YY and convert to numbers
-        const currentDate = new Date();
-        const currentMonth = currentDate.getMonth() + 1; // JavaScript months are 0-indexed
-        const currentYear = currentDate.getFullYear() % 100; // Get last two digits of the current year
-
-        if (enteredYear < currentYear || (enteredYear === currentYear && enteredMonth < currentMonth)) {
-            alert("The expiry date cannot be in the past.");
-            return false;
-        }
-
-        // Validate CVC code
-        if (!cvcRegex.test(cvc)) {
-            alert("Please enter a valid CVC code.");
-            return false;
-        }
-
-        // Validate cardholder's name
-        if (name.trim() === "") {
-            alert("Please enter the cardholder's name.");
-            return false;
-        }
-
-        return true;
-    }
+    // $(document).ready(function () {
+    //     dataParameter = []
+    //     const price = $(".price");
+    //     // Hoang Add
+    //     // Xử lý khi nhấn nút "Áp dụng" cho mã giảm giá
+    //     $("#btnCheckCode").click(function () {
+    //         const discountCode = $("#txtDiscountCode").val().trim();
+    //         if (discountCode === "") {
+    //             alert("Vui lòng nhập mã giảm giá.");
+    //             return;
+    //         }
+    //
+    //         // Gọi API kiểm tra mã giảm giá
+    //         $.ajax({
+    //             type: "GET",
+    //             url: "http://localhost:8080/api/admin/discounts/by-code",
+    //             data: {code: discountCode},
+    //             success: function (response) {
+    //                 const discount = response.result;
+    //                 if (discount.isActive) {
+    //                     // Tính toán tiền sau khi áp dụng giảm giá
+    //                     const currentPrice = Number(price.data("price"));
+    //                     const discountAmount = currentPrice * (discount.percentage / 100);
+    //                     const newPrice = currentPrice - discountAmount;
+    //
+    //                     // Cập nhật giá hiển thị
+    //                     price.text(newPrice.toLocaleString('en-US', {style: 'currency', currency: 'VND'}));
+    //                     price.data("price", newPrice);
+    //
+    //                     alert("Mã giảm giá áp dụng thành công! Số tiền được giảm: " + discountAmount.toLocaleString('en-US', {style: 'currency', currency: 'VND'}));
+    //                 } else {
+    //                     alert("Mã giảm giá này không còn hiệu lực.");
+    //                 }
+    //             },
+    //             error: function () {
+    //                 alert("Mã giảm giá không hợp lệ.");
+    //             }
+    //         });
+    //     });
+    //
+    //     // Xử lý sự kiện click ghế
+    //     $(".slot__item").click(function () {
+    //         const priceSeat = Number($(this).data("price"));
+    //         const codeSeat = $(this).data("seat");
+    //         const seatId = $(this).data("seatId");
+    //
+    //         if (!$(this).hasClass("item--picked") && !$(this).hasClass("item--checked"))
+    //             if ($(this).hasClass("item--picking")) {
+    //                 $(this).removeClass("item--picking");
+    //                 current = Number(price.data("price") - priceSeat)
+    //                 price.text(current.toLocaleString('en-US', {style: 'currency', currency: 'VND'}));
+    //                 price.data("price", current)
+    //                 $.each($(".mr-2"), function (index, seat) {
+    //                     if (seat.textContent === "Ghế: " + codeSeat + ",") {
+    //                         seat.remove()
+    //                     }
+    //                 })
+    //                 dataParameter.splice(dataParameter.indexOf(seatId), 1);
+    //             } else {
+    //                 $(this).addClass("item--picking");
+    //                 current = Number(price.data("price") + priceSeat)
+    //                 price.text(current.toLocaleString('en-US', {style: 'currency', currency: 'VND'}));
+    //                 price.data("price", current)
+    //                 $(".slot").append('<span class="mr-2">Ghế: ' + codeSeat + ',</span>')
+    //                 dataParameter.push(seatId)
+    //             }
+    //     });
+    //
+    //     // Xử lý thời gian đếm ngược
+    //     var clock = setInterval(function () {
+    //         $('.time').text(remainingTime());
+    //         if (remainingTime() == null) {
+    //             clearInterval(clock);
+    //             $("#error-time").addClass("swal-overlay--show-modal")
+    //         }
+    //     }, 1000);
+    //
+    //     // Xử lý khi nhấn nút Đặt vé
+    //     $("#btn-booking").click(function () {
+    //         if (dataParameter.length !== 0) {
+    //             var json = JSON.stringify({
+    //                 "scheduleId": [[${schedule.id}]],
+    //                 "userId": [[${session.jwtResponse.id}]],
+    //                 "listSeatIds": dataParameter
+    //             });
+    //
+    //             $.ajax({
+    //                 type: "POST",
+    //                 url: "http://localhost:8080/api/bills/create-new-bill",
+    //                 headers: {"Authorization": "Bearer " + [[${session.jwtResponse.accessToken}]]},
+    //                 data: json,
+    //                 contentType: "application/json; charset=utf-8",
+    //                 success: function (data) {
+    //                     // Đổi trạng thái của ghế
+    //                     $(".item--picking").addClass("item--checked");
+    //                     $(".item--picking").removeClass("item--picking");
+    //
+    //                     // Reset bill
+    //                     $(".slot").empty()
+    //                     price.data("price", "0")
+    //                     current = 0
+    //                     price.text(current.toLocaleString('en-US', {style: 'currency', currency: 'VND'}));
+    //
+    //                     // Đóng các modal checkout
+    //                     $('#CreditModal').trigger('click');
+    //
+    //                     // Hiển thị thông báo thành công
+    //                     $("#success").addClass("swal-overlay--show-modal")
+    //                     dataParameter = []
+    //                 },
+    //                 error: function (e) {
+    //                     $("#text-error").html(e.responseText)
+    //                     $("#error").addClass("swal-overlay--show-modal")
+    //                     $("button").click(function (e) {
+    //                         location.reload(true);
+    //                     });
+    //                 }
+    //             });
+    //         } else {
+    //             $("#text-error").html("Bạn chưa chọn chỗ ngồi!")
+    //             $("#error").addClass("swal-overlay--show-modal")
+    //         }
+    //     });
+    //
+    //     // Đóng thông báo
+    //     $(".notify").click(function (e) {
+    //         if (remainingTime() != null)
+    //             $(this).removeClass("swal-overlay--show-modal");
+    //     });
+    //
+    //     $("#notify-error").click(function () {
+    //         window.location.href = '/';
+    //     });
+    // });
+    //
+    // function remainingTime() {
+    //     const today = new Date();
+    //     const dateSchedule = new Date([[${schedule.startDate}+' '+${schedule.startTime}]])
+    //     seconds = Math.floor((dateSchedule - today) / 1000);
+    //     if (seconds > 0) {
+    //         var h = Math.floor(seconds / 3600);
+    //         var m = Math.floor((seconds % 3600) / 60);
+    //         var s = seconds - h * 3600 - m * 60;
+    //     } else {
+    //         return null
+    //     }
+    //     return h + " giờ " + m + " phút " + s + " giây ";
+    // }
 </script>
 <script>
     !function (e) {
@@ -545,7 +653,7 @@ $(document).ready(function () {
                 return e.default
             } : function () {
                 return e
-            };A
+            };
             return a.d(r, "a", r), r
         };
         a.o = function (e, r) {
@@ -562,3 +670,444 @@ $(document).ready(function () {
 </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="vi" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--	<link th:href="@{/css/main.css}" rel="stylesheet"/>-->
+<!--    <meta charset="utf-8">-->
+
+<!--    <meta name="viewport" content="width=device-width,initial-scale=1">-->
+<!--    <meta name="theme-color" content="#000000">-->
+<!--    <meta name="description" content="Web site created using create-react-app">-->
+<!--    <link rel="apple-touch-icon" href="logo192.png">-->
+<!--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"-->
+<!--        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">-->
+<!--    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&amp;display=swap" rel="stylesheet">-->
+<!--    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400,700&amp;display=swap" rel="stylesheet">-->
+<!--    <link href="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.css" rel="stylesheet">-->
+<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">-->
+<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">-->
+<!--    <title>AP Movie</title>-->
+<!--    <link th:href="@{/css/2.fd207d57.chunk.css}" rel="stylesheet"/>-->
+<!--    <link th:href="@{/css/main.ffa69c8e.chunk.css}" rel="stylesheet"/>-->
+<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" -->
+<!--    integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" -->
+<!--    crossorigin="anonymous" referrerpolicy="no-referrer" />-->
+<!--    <style>-->
+<!--            .checkOut__left .bookSlot .bookSlot__content .chooseSlot .picking .slot__picking .slot__row .slot__item {-->
+<!--                font-size: 31px !important;-->
+<!--                font-weight: 600 !important;-->
+<!--            }-->
+<!--            .item&#45;&#45;checked{-->
+<!--            	cursor: no-drop !important;-->
+<!--            	color:gold !important;-->
+<!--            }-->
+<!--            .item&#45;&#45;hidden{-->
+<!--            	cursor: no-drop !important;-->
+<!--            	color:#FFFF !important;-->
+<!--            }-->
+<!--    </style>-->
+<!--</head>-->
+
+<!--<body data-new-gr-c-s-check-loaded="14.1073.0" data-gr-ext-installed=""><noscript>You need to enable JavaScript to run-->
+<!--        this app.</noscript>-->
+<!--        <div id="root">-->
+<!--        	<header lang="vi" th:include="fragments/header :: header"/>-->
+<!--            <div class="container-fluid bg-light" style="padding-top: 20px;">-->
+<!--                <div class="bookTicket__content row mt-5">-->
+<!--                    <div class="checkOut__left col-md-9 col-sm-12 p-0">-->
+<!--                        <div class="bookSlot">-->
+<!--                            <div class="poster__film"-->
+<!--                                style="width: 0;-->
+<!--                                background-image: url(&quot;http://movie0706.cybersoft.edu.vn/hinhanh/john-wick-iiisssssssssxxxssssssssssssssssssss_gp09.jpg&quot;);">-->
+<!--                                -->
+<!--                            </div>-->
+<!--                            <div class="bookSlot__content" style="overflow-x: scroll;">-->
+<!--                                <div class="theater__info d-flex justify-content-between">-->
+<!--                                    <div class="theater__img d-flex bg-light"><img alt="hinhanh"-->
+<!--                                            src="http://movie0706.cybersoft.edu.vn/hinhanh/john-wick-iiisssssssssxxxssssssssssssssssssss_gp09.jpg">-->
+<!--                                        <div class="theater__name">-->
+<!--                                        	<span class="name">-->
+<!--                                        		<span class="subname" th:text="${schedule.room.name}"></span>-->
+<!--                                        	</span>-->
+<!--                                        	<p class="showtime" th:text="'Ngày chiếu: '+${schedule.startDate}"></p>-->
+<!--                                            <p class="showtime" th:text="'Giờ chiếu: '+${schedule.startTime}"></p>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                    <div class="timeKeepSlot">-->
+<!--                                        <p class="title__text" style="font-size: 14px;">Đếm ngược kết thúc lịch chiếu</p><span class="time" style="font-size: 22px;"></span>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div class="chooseSlot" style="width: 850px">-->
+<!--                                    <div class="screen__img"><img src="https://i.ibb.co/zWgWjtg/screen.png" alt="screen">-->
+<!--                                    </div>-->
+<!--                                    <div class="picking row" style="padding: 0 50px;">-->
+<!--                                        <div class="slot__picking col-12">-->
+<!--                                            <div class="slot__row">-->
+<!--                                                <i th:each="seat: ${seats}" class="fa fa-couch slot__item " -->
+<!--                                                th:classappend="${seat.isActive} ? -->
+<!--                                                (${seat.isChecked} ? 'item&#45;&#45;checked':-->
+<!--                                                (${seat.isOccupied}==1 ? 'item&#45;&#45;picked':-->
+<!--                                                (${seat.isVip} ? 'item&#45;&#45;vip':''))):-->
+<!--                                                 'item&#45;&#45;hiden'"-->
+<!--                                                th:data-seat="${seat.name}" -->
+<!--                                                th:data-price="${seat.isVip}? ${schedule.price}+10000:${schedule.price}"-->
+<!--                                                th:data-seat-id="${seat.id}"></i>-->
+<!--                                            </div>-->
+
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                    <div class="slot__detail row">-->
+<!--                                        <div class="col-md-3 col-sm-6 col-xs-6"><i-->
+<!--                                                class="fa fa-couch item&#45;&#45;picking"></i><span class="slot__text">Ghế đang-->
+<!--                                                chọn</span></div>-->
+<!--                                        <div class="col-md-2 col-sm-6 col-xs-6"><i-->
+<!--                                                class="fa fa-couch item&#45;&#45;picked"></i><span class="slot__text">Ghế có người-->
+<!--                                                </span></div>-->
+<!--                                        <div class="col-md-2 col-sm-6 col-xs-6"><i-->
+<!--                                                class="fa fa-couch item&#45;&#45;regular"></i><span class="slot__text">Ghế Thường</span></div>-->
+<!--                                        <div class="col-md-2 col-sm-6 col-xs-6"><i class="fa fa-couch item&#45;&#45;vip"></i><span-->
+<!--                                                class="slot__text">Ghế Vip</span></div>-->
+<!--                                        <div class="col-md-3 col-sm-6 col-xs-6"><i class="fa fa-couch item&#45;&#45;checked"></i><span-->
+<!--                                                class="slot__text">Ghế của bạn</span></div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="checkOut__right col-md-3 col-sm-12">-->
+<!--                        <div class="checkout__form">-->
+<!--                            <div class="total__price"><span class="price" data-price="0">0₫</span></div>-->
+<!--                            <div class="film__info">-->
+<!--                            	<span class="film__age&#45;&#45;C" th:text="${schedule.room.name}"></span>-->
+<!--                            	<span class="film__name" th:text="${schedule.movie.name}"></span>-->
+<!--                                <p class="film__detail" th:text="${schedule.startDate}+' - '+${schedule.startTime}"></p>-->
+<!--                                <p class="theater__name" th:text="${schedule.branch.name}"></p>-->
+<!--                                <p class="film__address" th:text="${schedule.branch.diaChi}"></p>-->
+<!--                            </div>-->
+<!--                            <div class="count__slot">-->
+<!--                                <div>Ghế đã chọn: </div>-->
+<!--                                <div class="slot"></div>-->
+<!--                            </div>-->
+<!--                            <div class="discountForm d-flex justify-content-between">-->
+<!--                                <div class="discountForm__content"><label class="label__name">Mã giảm giá</label><input-->
+<!--                                        type="text" name="code" id="txtDiscountCode" class="form-control d-inline"-->
+<!--                                        placeholder="Nhập tại đây..."></div><button id="btnCheckCode" class="btn mb-2">Áp-->
+<!--                                    dụng</button>-->
+<!--                            </div>-->
+<!--                            <div class="payForm"><a class="pay__link" href="/#"><span class="title__text">Hình thức thanh-->
+<!--                                        toán</span>-->
+<!--                                    <p class="text__notification">Vui lòng chọn ghế để hiển thị phương thức thanh toán phù-->
+<!--                                        hợp.</p>-->
+<!--                                </a></div>-->
+<!--                        </div>-->
+<!--                        <div class="textNotification text-center"><i class="fa fa-info-circle text-danger mr-1"></i><span-->
+<!--                                class="noti__text">Vé đã mua không thể đổi hoặc hoàn tiền Mã vé sẽ được gửi qua tin nhắn-->
+<!--                                <span class="noti__link">ZMS</span> (tin nhắn Zalo) và <span class="noti__link">Email</span>-->
+<!--                                đã nhập. </span></div>-->
+<!--                        <div id="btnBook" class="btnBook" data-toggle="modal" data-target="#CreditModal">Thanh toán</div>-->
+<!--                        <div>-->
+<!--                            <div class="CreditModal modal fade bd-example-modal-lg" id="CreditModal" tabindex="-1"-->
+<!--                                role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">-->
+<!--                                <div class="modal-dialog modal-lg" role="document">-->
+<!--                                    <div class="modal-content">-->
+<!--                                        <div class="modal-header">-->
+<!--                                            <h5 class="modal-title">Thanh toán</h5><button type="button" class="close"-->
+<!--                                                data-dismiss="modal" aria-label="Close"><span-->
+<!--                                                    aria-hidden="true">×</span></button>-->
+<!--                                        </div>-->
+<!--                                        <div class="modal-body">-->
+<!--                                            <div id="PaymentForm">-->
+<!--                                                <div class="row">-->
+<!--                                                    <div class="credit-card col-md-6 col-sm-12 mb-2">-->
+<!--                                                        <div class="rccs">-->
+<!--                                                            <div class="rccs__card rccs__card&#45;&#45;unknown">-->
+<!--                                                                <div class="rccs__card&#45;&#45;front">-->
+<!--                                                                    <div class="rccs__card__background"></div>-->
+<!--                                                                    <div class="rccs__issuer"></div>-->
+<!--                                                                    <div class="rccs__cvc__front"></div>-->
+<!--                                                                    <div class="rccs__number">•••• •••• •••• ••••</div>-->
+<!--                                                                    <div class="rccs__name">YOUR NAME HERE</div>-->
+<!--                                                                    <div class="rccs__expiry">-->
+<!--                                                                        <div class="rccs__expiry__valid">valid thru</div>-->
+<!--                                                                        <div class="rccs__expiry__value">••/••</div>-->
+<!--                                                                    </div>-->
+<!--                                                                    <div class="rccs__chip"></div>-->
+<!--                                                                </div>-->
+<!--                                                                <div class="rccs__card&#45;&#45;back">-->
+<!--                                                                    <div class="rccs__card__background"></div>-->
+<!--                                                                    <div class="rccs__stripe"></div>-->
+<!--                                                                    <div class="rccs__signature"></div>-->
+<!--                                                                    <div class="rccs__cvc"></div>-->
+<!--                                                                    <div class="rccs__issuer"></div>-->
+<!--                                                                </div>-->
+<!--                                                            </div>-->
+<!--                                                        </div>-->
+<!--                                                    </div>-->
+<!--                                                    <div class="info-card col-md-6 col-sm-12">-->
+<!--                                                        <form class="info-form" th:action="@{/booking}"  method="post">-->
+<!--                                                            <div class="textb"><input type="tel" name="number"-->
+<!--                                                                    class="w-100">-->
+<!--                                                                <div class="placeholder">Card Number</div>-->
+<!--                                                            </div>-->
+<!--                                                            <div class="row">-->
+<!--                                                                <div class="col-6" style="padding-right: 0px;">-->
+<!--                                                                    <div class="textb"><input type="tel" name="expiry">-->
+<!--                                                                        <div class="placeholder">Valid</div>-->
+<!--                                                                    </div>-->
+<!--                                                                </div>-->
+<!--                                                                <div class="col-6">-->
+<!--                                                                    <div class="textb"><input type="tel" name="cvc">-->
+<!--                                                                        <div class="placeholder">CVC</div>-->
+<!--                                                                    </div>-->
+<!--                                                                </div>-->
+<!--                                                            </div>-->
+<!--                                                            <div class="textb"><input type="text" name="name">-->
+<!--                                                                <div class="placeholder">Name</div>-->
+<!--                                                            </div>-->
+<!--                                                        </form>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                        <div class="modal-footer"><button id="btn-booking" type="button" class="btn-style draw-border">Đặt-->
+<!--                                                vé</button></div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <footer lang="vi" class="container" th:include="fragments/footer :: footer"/>-->
+<!--        </div>-->
+<!--  <div id="success" class="swal-overlay notify " tabindex="-1">-->
+<!--  <div class="swal-modal" role="dialog" aria-modal="true"><div class="swal-icon swal-icon&#45;&#45;success">-->
+<!--    <span class="swal-icon&#45;&#45;success__line swal-icon&#45;&#45;success__line&#45;&#45;long"></span>-->
+<!--    <span class="swal-icon&#45;&#45;success__line swal-icon&#45;&#45;success__line&#45;&#45;tip"></span>-->
+
+<!--    <div class="swal-icon&#45;&#45;success__ring"></div>-->
+<!--    <div class="swal-icon&#45;&#45;success__hide-corners"></div>-->
+<!--  </div><div class="swal-title" >Thanh toán thành công</div><div class="swal-text" style=""></div><div class="swal-footer"><div class="swal-button-container">-->
+
+<!--    <button class="swal-button swal-button&#45;&#45;confirm">OK</button>-->
+
+<!--    <div class="swal-button__loader">-->
+<!--      <div></div>-->
+<!--      <div></div>-->
+<!--      <div></div>-->
+<!--    </div>-->
+
+<!--  </div></div></div></div>-->
+<!--  <div id="error" class="swal-overlay notify" tabindex="-1" >-->
+<!--  <div class="swal-modal" role="dialog" aria-modal="true"><div class="swal-icon swal-icon&#45;&#45;error">-->
+<!--    <div class="swal-icon&#45;&#45;error__x-mark">-->
+<!--      <span class="swal-icon&#45;&#45;error__line swal-icon&#45;&#45;error__line&#45;&#45;left"></span>-->
+<!--      <span class="swal-icon&#45;&#45;error__line swal-icon&#45;&#45;error__line&#45;&#45;right"></span>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  	<div id="text-error" class="swal-title" >Có người nhanh tay đặt chỗ của bạn</div>-->
+<!--  	<div class="swal-footer">-->
+<!--  <div class="swal-button-container">-->
+
+<!--    <button  class="swal-button swal-button&#45;&#45;confirm">OK</button>-->
+
+<!--    <div class="swal-button__loader">-->
+<!--      <div></div>-->
+<!--      <div></div>-->
+<!--      <div></div>-->
+<!--    </div>-->
+
+<!--  </div></div></div></div>-->
+<!--    <div id="error-time" class="swal-overlay" tabindex="-1" >-->
+<!--  <div class="swal-modal" role="dialog" aria-modal="true"><div class="swal-icon swal-icon&#45;&#45;error">-->
+<!--    <div class="swal-icon&#45;&#45;error__x-mark">-->
+<!--      <span class="swal-icon&#45;&#45;error__line swal-icon&#45;&#45;error__line&#45;&#45;left"></span>-->
+<!--      <span class="swal-icon&#45;&#45;error__line swal-icon&#45;&#45;error__line&#45;&#45;right"></span>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  	<div class="swal-title" >Lịch chiếu đã đóng, vui lòng chọn lịch chiếu khác!</div>-->
+<!--  	<div class="swal-footer">-->
+<!--  <div class="swal-button-container">-->
+
+<!--    <button id="notify-error" class="swal-button swal-button&#45;&#45;confirm">OK</button>-->
+
+<!--    <div class="swal-button__loader">-->
+<!--      <div></div>-->
+<!--      <div></div>-->
+<!--      <div></div>-->
+<!--    </div>-->
+
+<!--  </div></div></div></div>-->
+<!--    <script src="https://code.jquery.com/jquery-3.4.1.min.js"-->
+<!--        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>-->
+<!--    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"-->
+<!--        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"-->
+<!--        crossorigin="anonymous"></script>-->
+<!--    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"-->
+<!--        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"-->
+<!--        crossorigin="anonymous"></script>-->
+<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" -->
+<!--	integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" -->
+<!--	crossorigin="anonymous" ></script>-->
+<!--    <script src="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.js"></script>-->
+<!--        <script th:inline="javascript">-->
+<!--        	-->
+<!--            $(document).ready(function(){-->
+<!--            	dataParameter=[]-->
+<!--                const price=$(".price");-->
+<!--              // css seat  -->
+<!--                $(".slot__item").click(function(){-->
+<!--                	const priceSeat=Number($(this).data("price"))-->
+<!--                	-->
+<!--                	const codeSeat=$(this).data("seat")-->
+<!--                    const seatId=$(this).data("seatId")-->
+<!--                    if(!$(this).hasClass("item&#45;&#45;picked") && !$(this).hasClass("item&#45;&#45;checked"))-->
+<!--                    if($(this).hasClass("item&#45;&#45;picking")){-->
+<!--                        $(this).removeClass("item&#45;&#45;picking");-->
+<!--                        current=Number(price.data("price")-priceSeat)-->
+<!--                        price.text(current.toLocaleString('en-US', {style : 'currency', currency : 'VND'}));-->
+<!--                        price.data("price",current)-->
+<!--                        $.each($(".mr-2"), function(index,seat){-->
+<!--                            -->
+<!--                            if(seat.textContent=="Ghế: "+codeSeat+","){-->
+<!--                                seat.remove()-->
+<!--                            }-->
+<!--                        })-->
+<!--                        -->
+<!--                        dataParameter.splice(dataParameter.indexOf(seatId), 1);-->
+
+<!--                    }-->
+<!--                    else{-->
+<!--                        $(this).addClass("item&#45;&#45;picking");-->
+<!--                        current=Number(price.data("price")+priceSeat)-->
+<!--                        -->
+<!--                        price.text(current.toLocaleString('en-US', {style : 'currency', currency : 'VND'}));-->
+<!--                        price.data("price",current)-->
+<!--                        $(".slot").append('<span class="mr-2">Ghế: '+codeSeat+',</span>')-->
+<!--                        dataParameter.push(seatId)-->
+<!--                        -->
+<!--                    }-->
+<!--                  });-->
+<!--                //clock time-->
+<!--               var clock= setInterval(function() {-->
+<!--                    $('.time').text(remainingTime());-->
+<!--                    if(remainingTime()==null){-->
+<!--              		  clearInterval(clock);-->
+<!--        			  $("#error-time").addClass("swal-overlay&#45;&#45;show-modal")-->
+<!--                    }-->
+<!--                }, 1000);-->
+<!--              //submit form booking-->
+<!--            	$("#btn-booking").click(function(){-->
+<!--            		if(dataParameter.length!=0){-->
+<!--	                var json = JSON.stringify(-->
+<!--	                		{-->
+<!--	                			"scheduleId": [[${schedule.id}]],-->
+<!--	                			"userId" :[[${session.jwtResponse.id}]],-->
+<!--	                			"listSeatIds":dataParameter-->
+<!--	                		});-->
+<!--	                -->
+<!--	                $.ajax({-->
+<!--	                    type: "POST",-->
+<!--	                    url: "http://localhost:8080/api/bills/create-new-bill",-->
+<!--	                    headers: {"Authorization": "Bearer "+[[${session.jwtResponse.accessToken}]]},-->
+<!--	                    data: json,-->
+<!--	                    contentType: "application/json; charset=utf-8",-->
+<!--	                    success:function(data){-->
+<!--	                    	//change status of seat-->
+<!--	                    	$(".item&#45;&#45;picking").addClass("item&#45;&#45;checked");-->
+<!--	                    	$(".item&#45;&#45;picking").removeClass("item&#45;&#45;picking");-->
+<!--	                    	-->
+<!--	                    	//reset bill-->
+<!--	                    	$(".slot").empty()-->
+<!--	                    	price.data("price","0")-->
+<!--	                        current=0-->
+<!--	                        price.text(current.toLocaleString('en-US', {style : 'currency', currency : 'VND'}));-->
+<!--	                    	-->
+<!--	                    	//close all modal check-out-->
+<!--	                    	$('#CreditModal').trigger('click');-->
+<!--	                    	-->
+<!--	                    	//show notify-->
+<!--	                    	$("#success").addClass("swal-overlay&#45;&#45;show-modal")-->
+
+<!--							dataParameter=[]-->
+<!--	              			-->
+<!--	                    },-->
+<!--	                    error: function (e) {-->
+<!--	                    	$("#text-error").html(e.responseText)-->
+<!--	                    	$("#error").addClass("swal-overlay&#45;&#45;show-modal")-->
+<!--	                        $("button").click(function(e){-->
+<!--	                        	location.reload(true);-->
+<!--	                        });-->
+<!--	                    }-->
+<!--	                   	});-->
+<!--            		}-->
+<!--            		else{-->
+<!--            			$("#text-error").html("Bạn chưa chọn chỗ ngồi!")-->
+<!--            			$("#error").addClass("swal-overlay&#45;&#45;show-modal")-->
+<!--            		}-->
+<!--                });-->
+<!--            	//close notify-->
+<!--                $(".notify").click(function(e){-->
+<!--                	if(remainingTime()!=null)-->
+<!--                		$(this).removeClass("swal-overlay&#45;&#45;show-modal");-->
+<!--                });-->
+<!--        		$("#notify-error").click(function(){-->
+<!--        			window.location.href ='/';-->
+<!--        		})-->
+<!--              });-->
+<!--            function remainingTime() {-->
+<!--            	  const today = new Date();-->
+<!--            	  const dateSchedule=new Date([[${schedule.startDate}+' '+${schedule.startTime}]])-->
+<!--            	  seconds=Math.floor((dateSchedule-today)/1000);-->
+<!--            	  if(seconds>0){-->
+<!--	            	  var h = Math.floor(seconds/3600);-->
+<!--	            	  var m = Math.floor((seconds%3600)/60);-->
+<!--	            	  var s = seconds- h*3600-m*60;-->
+<!--            	  }-->
+<!--            	  else{-->
+<!--        			  return null-->
+<!--            	  }-->
+<!--            	  return  h + " giờ " + m + " phút " + s+" giây ";-->
+<!--            	}-->
+
+<!--            -->
+<!--        </script>-->
+<!--    <script>-->
+<!--    !function (e) { function r(r) { for (var n, a, p = r[0], i = r[1], l = r[2], c = 0, s = []; c < p.length; c++)a = p[c], Object.prototype.hasOwnProperty.call(o, a) && o[a] && s.push(o[a][0]), o[a] = 0; for (n in i) Object.prototype.hasOwnProperty.call(i, n) && (e[n] = i[n]); for (f && f(r); s.length;)s.shift()(); return u.push.apply(u, l || []), t() } function t() { for (var e, r = 0; r < u.length; r++) { for (var t = u[r], n = !0, p = 1; p < t.length; p++) { var i = t[p]; 0 !== o[i] && (n = !1) } n && (u.splice(r&#45;&#45;, 1), e = a(a.s = t[0])) } return e } var n = {}, o = { 1: 0 }, u = []; function a(r) { if (n[r]) return n[r].exports; var t = n[r] = { i: r, l: !1, exports: {} }; return e[r].call(t.exports, t, t.exports, a), t.l = !0, t.exports } a.m = e, a.c = n, a.d = function (e, r, t) { a.o(e, r) || Object.defineProperty(e, r, { enumerable: !0, get: t }) }, a.r = function (e) { "undefined" != typeof Symbol && Symbol.toStringTag && Object.defineProperty(e, Symbol.toStringTag, { value: "Module" }), Object.defineProperty(e, "__esModule", { value: !0 }) }, a.t = function (e, r) { if (1 & r && (e = a(e)), 8 & r) return e; if (4 & r && "object" == typeof e && e && e.__esModule) return e; var t = Object.create(null); if (a.r(t), Object.defineProperty(t, "default", { enumerable: !0, value: e }), 2 & r && "string" != typeof e) for (var n in e) a.d(t, n, function (r) { return e[r] }.bind(null, n)); return t }, a.n = function (e) { var r = e && e.__esModule ? function () { return e.default } : function () { return e }; return a.d(r, "a", r), r }, a.o = function (e, r) { return Object.prototype.hasOwnProperty.call(e, r) }, a.p = "/"; var p = this.webpackJsonpmoviereactapp = this.webpackJsonpmoviereactapp || [], i = p.push.bind(p); p.push = r, p = p.slice(); for (var l = 0; l < p.length; l++)r(p[l]); var f = i; t() }([])</script>-->
+
+
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->

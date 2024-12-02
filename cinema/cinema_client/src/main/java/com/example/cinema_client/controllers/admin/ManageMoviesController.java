@@ -10,7 +10,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -70,27 +69,42 @@ public class ManageMoviesController {
         return "admin/update-movie";
     }
 
-   @PostMapping("/update")
-    public String updateMoviePage(@ModelAttribute("movie") MovieDTO movie,
-    		@RequestParam(name = "checkShowing", required = false, defaultValue = "false") boolean checkShowing,
-    		HttpSession session,Model model){
-        //Gắn access token jwt vào header để gửi kèm request
+    @PostMapping("/update")
+    public String updateMovie(@ModelAttribute("movie") MovieDTO movie,
+                              @RequestParam(name = "checkShowing", required = false, defaultValue = "false") boolean checkShowing,
+                              HttpSession session, Model model) {
+        // Set access token JWT in header
         HttpHeaders headers = new HttpHeaders();
         headers.set(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE);
-        JwtResponseDTO jwtResponseDTO = (JwtResponseDTO)session.getAttribute("jwtResponse");
-        headers.set(HttpHeaders.AUTHORIZATION,"Bearer "+jwtResponseDTO.getAccessToken());
-        //kiểm tra phim đang chiếu hay sắp chiếu
-    	if(checkShowing) {
-    		movie.setIsShowing(1);
-    	}
-    	else {movie.setIsShowing(0);
-    	}
-        HttpEntity<?> entity = new HttpEntity<>(movie,headers);
+        JwtResponseDTO jwtResponseDTO = (JwtResponseDTO) session.getAttribute("jwtResponse");
+        headers.set(HttpHeaders.AUTHORIZATION, "Bearer " + jwtResponseDTO.getAccessToken());
+
+        // Check if the movie is showing or upcoming
+        movie.setIsShowing(checkShowing ? 1 : 0);
+
         try {
-        	ResponseEntity<String> response = restTemplate.exchange(API_GET_MOVIES,HttpMethod.PUT, entity, String.class);
+            // If the user did not select a new image, retain the current image URL
+            if (movie.getSmallImageURl() == null || movie.getSmallImageURl().isEmpty()) {
+                ResponseEntity<MovieDTO> existingMovieResponse = restTemplate.exchange(
+                    API_GET_MOVIES + "/" + movie.getId(),
+                    HttpMethod.GET,
+                    new HttpEntity<>(headers),
+                    MovieDTO.class
+                );
+
+                MovieDTO existingMovie = existingMovieResponse.getBody();
+                movie.setSmallImageURl(existingMovie.getSmallImageURl());
+            }
+
+            HttpEntity<MovieDTO> entity = new HttpEntity<>(movie, headers);
+            restTemplate.exchange(API_GET_MOVIES, HttpMethod.PUT, entity, String.class);
+        } catch (HttpClientErrorException.NotFound e) {
+            model.addAttribute("error", "Movie not found. Please check the movie ID.");
+            return "redirect:/admin/movies";
         } catch (Exception e) {
-			System.out.println(e);
-		}
+            System.out.println(e);
+        }
+
         return "redirect:/admin/movies";
     }
 
@@ -119,18 +133,6 @@ public class ManageMoviesController {
         } catch (Exception e) {
             System.out.println(e);
         }
-
-        return "redirect:/admin/movies";
-    }
-    @DeleteMapping("/delete")
-    public String deleteMovie(@RequestParam Integer movieId, HttpSession session) {
-        HttpHeaders headers = new HttpHeaders();
-        headers.set(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE);
-        JwtResponseDTO jwtResponseDTO = (JwtResponseDTO) session.getAttribute("jwtResponse");
-        headers.set(HttpHeaders.AUTHORIZATION, "Bearer " + jwtResponseDTO.getAccessToken());
-
-        HttpEntity<?> entity = new HttpEntity<>(headers);
-        restTemplate.exchange(API_GET_MOVIES + "?movieId=" + movieId, HttpMethod.DELETE, entity, String.class);
 
         return "redirect:/admin/movies";
     }

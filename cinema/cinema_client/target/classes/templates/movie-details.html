@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-    <title>CTR Ticket</title>
+    <title>AP Movie</title>
     <link th:href="@{/css/2.fd207d57.chunk.css}" rel="stylesheet"/>
     <link th:href="@{/css/main.ffa69c8e.chunk.css}" rel="stylesheet"/>
     <style type="text/css">
@@ -91,7 +91,7 @@
     <header lang="en" th:include="fragments/header :: header"/>
     <section class="movieInfo">
         <div class="full__background">
-            <img th:src="@{'/images/' + ${movie.smallImageURl}}" th:alt="${movie.smallImageURl}" style="height: 450px;">
+            <img th:src="*{smallImageURl}" th:alt="*{smallImageURl}" style="height: 450px;">
             <div class="overlay__gradient"></div>
             <div class="play__mobile"><i class="fa fa-play"></i></div>
             <div class="rating__point">
@@ -104,8 +104,8 @@
             <div class="row">
                 <div class="movie__poster text-left col-3">
                     <div class="poster__img d-flex justify-content-center align-items-center"
-                            style="width: 240px; height: 300px;">
-                       <img class="w-100 h-100" th:src="@{'/images/' + ${movie.smallImageURl}}" th:alt="${movie.smallImageURl}">
+                         style="width: 220px; height: 300px;">
+                        <img class="w-100 h-100" th:src="*{smallImageURl}" th:alt="*{smallImageURl}">
                         <div class="play__btn"><i class="fa fa-play"></i></div>
                     </div>
                 </div>
@@ -389,8 +389,10 @@
             referenceId: movieId
         };
 
+        console.log(data);
+        
         // Send POST request to API
-        fetch(`/admin/feedbacks/add/movie`, {
+        fetch(`http://localhost:8080/api/feedbacks/add/movie`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

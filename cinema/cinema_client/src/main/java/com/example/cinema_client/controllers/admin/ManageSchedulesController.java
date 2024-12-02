@@ -14,7 +14,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -128,22 +127,6 @@ public class ManageSchedulesController {
 			System.out.println(e);
 		}
 	    
-        return "redirect:/admin/schedules";
-    }
-    @DeleteMapping("/delete")
-    public String deleteSchedule(@RequestParam("scheduleId") Integer scheduleId, HttpSession session) {
-        HttpHeaders headers = new HttpHeaders();
-        headers.set(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE);
-        JwtResponseDTO jwtResponseDTO = (JwtResponseDTO) session.getAttribute("jwtResponse");
-        headers.set(HttpHeaders.AUTHORIZATION, "Bearer " + jwtResponseDTO.getAccessToken());
-        HttpEntity<?> entity = new HttpEntity<>(headers);
-
-        try {
-            restTemplate.exchange(API_SCHEDULES + "?scheduleId=" + scheduleId, HttpMethod.DELETE, entity, String.class);
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-
         return "redirect:/admin/schedules";
     }
 }

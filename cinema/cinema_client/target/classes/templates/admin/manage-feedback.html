@@ -49,12 +49,12 @@
                                 <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Content</th>
-                                    <th>Evaluate</th>
-                                    <th>Type</th>
+                                    <th>Nội dung</th>
+                                    <th>Đánh giá</th>
+                                    <th>Loại</th>
                                     <th>User ID</th>
                                     <th>Reference ID</th>
-                                    <th>Function</th>
+                                    <th>Chức năng</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -92,7 +92,7 @@
                 <input id="update-id" type="text" name="id" style="display: none"></input>
                 <input type="text" name="userId" style="display: none" value=""></input>
                 <div class="form-item">
-                    <label>Full name</label>
+                    <label>Họ và tên</label>
                     <input id="update-product" type="text" name="product">
                 </div>
                 <div class="form-item">
@@ -104,7 +104,7 @@
                     <input id="update-priceS" type="password" name="priceS">
                 </div>
                 <div class="form-item">
-                    <label>Phone</label>
+                    <label>Số điện thoại</label>
                     <input id="update-url" type="text" name="url">
                 </div>
                 <input id="update-category" type="text" name="category0-ID" style="display: none">
@@ -168,32 +168,30 @@
         });
         $(".filters th:last-child").remove();
 
-       $("#example").on("click", ".btn-delete", function() {
-            if (confirm("Are you sure you want to delete?")) { // Hiển thị hộp thoại xác nhận
-                var tag = $(this);
-                $.ajax({
-                    url: "/admin/feedbacks/delete/" + $(this).data('id'),
-                    type: 'DELETE',
-                    headers: {
-                        "Authorization": "Bearer " + [[${session.jwtResponse.accessToken}]]
-                    },
-                    success: function(data) {
-                        console.log(data);
+        $("#example").on("click", ".btn-delete", function() {
+            var tag = $(this);
+            $.ajax({
+                url: "http://localhost:8080/api/feedbacks/delete/" + $(this).data('id'),
+                type: 'DELETE',
+                headers: {
+                    "Authorization": "Bearer " + [[${session.jwtResponse.accessToken}]]
+                },
+                success: function(data) {
+                    console.log(data)
+                    table
+                        .row(tag.parents('tr'))
+                        .remove().draw('page');
+                },
+                error: function(error) {
+                    if (error.status == 200) {
                         table
                             .row(tag.parents('tr'))
                             .remove().draw('page');
-                    },
-                    error: function(error) {
-                        if (error.status == 200) {
-                            table
-                                .row(tag.parents('tr'))
-                                .remove().draw('page');
-                        } else {
-                            console.log(error);
-                        }
+                    } else {
+                        console.log(error)
                     }
-                });
-            }
+                }
+            });
         });
     });
 </script>

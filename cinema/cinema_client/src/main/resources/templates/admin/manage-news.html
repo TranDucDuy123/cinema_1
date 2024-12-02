@@ -111,51 +111,54 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
   <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
- <script th:inline="javascript">
+  <script th:inline="javascript">
   $(document).ready(function () {
-    var table = $('#newsTable').DataTable({
-      autoWidth: false,
-      columnDefs: [
-        { width: 50, targets: 0 },  // ID
-        { width: 200, targets: 1 }, // Title
-        { width: 150, targets: 2 }, // Type
-        { width: 150, targets: 3 }, // Author
-        { width: 300, targets: 4 }, // Content
-        { width: 300, targets: 5 }, // Content 1
-        { width: 300, targets: 6 }, // Content 2
-        { width: 100, targets: 7 }, // Image
-        { width: 150, targets: 8 }, // Published Date
-        { width: 150, targets: 9 }  // Function
-      ],
-      orderCellsTop: true,
-      fixedHeader: true
-    });
+	    var table = $('#newsTable').DataTable({
+	        autoWidth: false,
+	        columnDefs: [
+	            { width: 50, targets: 0 },  // ID
+	            { width: 200, targets: 1 }, // Title
+	            { width: 150, targets: 2 }, // Type
+	            { width: 150, targets: 3 }, // Author
+	            { width: 300, targets: 4 }, // Content
+	            { width: 300, targets: 5 }, // Content 1
+	            { width: 300, targets: 6 }, // Content 2
+	            { width: 100, targets: 7 }, // Image
+	            { width: 150, targets: 8 }, // Published Date
+	            { width: 150, targets: 9 }  // Function
+	        ],
+	        orderCellsTop: true,
+	        fixedHeader: true
+	    });
 
-    // Sự kiện xóa bài viết
-    $('.btn-delete').on('click', function () {
-      var newsId = $(this).attr('data-id'); // Lấy id của tin tức
-      var row = $(this).closest('tr'); // Lấy hàng hiện tại để xóa khỏi bảng sau khi xóa thành công
+	    $(".filters th:last-child").remove();
 
-      // Hiển thị thông báo xác nhận trước khi xóa
-      if (confirm('Are you sure you want to delete this post?')) {
-        $.ajax({
-          url: '/admin/news/delete', // URL của API xóa
-          type: 'GET', // Hoặc 'DELETE' tùy theo cách bạn định nghĩa trong controller
-          data: { id: newsId }, // Gửi ID của bài viết
-          success: function (response) {
-            // Nếu thành công, xóa hàng tương ứng khỏi bảng
-            table.row(row).remove().draw();
-            alert('Post deleted successfully');
-          },
-          error: function (xhr) {
-            // Nếu có lỗi, hiển thị thông báo lỗi
-            alert('An error occurred while deleting the post.: ' + xhr.responseText);
-          }
-        });
-      }
-    });
-  });
-</script>
+	    $("#newsTable").on("click", ".btn-delete", function () {
+	        var tag = $(this);
+	        var newsId = $(this).data('id');
 
+	        var isConfirmed = confirm("Bạn có chắc chắn muốn xóa tin tức này không?");
+	        if (isConfirmed) {
+	            $.ajax({
+	                url: "http://localhost:8080/api/admin/news?newsId=" + newsId,
+	                type: 'DELETE',
+	                headers: {
+	                    "Authorization": "Bearer " + [[${session.jwtResponse.accessToken}]]
+	                },
+	                success: function (data) {
+	                    table.row(tag.parents('tr')).remove().draw('page');
+	                },
+	                error: function (error) {
+	                    if (error.status == 200) {
+	                        table.row(tag.parents('tr')).remove().draw('page');
+	                    } else {
+	                        console.log(error);
+	                    }
+	                }
+	            });
+	        }
+	    });
+	});
+  </script>
 </body>
 </html>

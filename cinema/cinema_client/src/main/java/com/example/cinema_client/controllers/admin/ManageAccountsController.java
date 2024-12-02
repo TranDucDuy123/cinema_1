@@ -17,7 +17,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -194,25 +193,4 @@ public class ManageAccountsController {
 	    
         return "redirect:/admin/accounts";
     }
-    @DeleteMapping
-    public String deleteAccount(@RequestParam Integer userId, HttpSession session) {
-    	HttpHeaders headers = new HttpHeaders();
-        headers.set(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE);
-        JwtResponseDTO jwtResponseDTO = (JwtResponseDTO)session.getAttribute("jwtResponse");
-        headers.set(HttpHeaders.AUTHORIZATION,"Bearer "+jwtResponseDTO.getAccessToken());
-        HttpEntity<?> entity = new HttpEntity<>(headers);
-        String urlTemplate = UriComponentsBuilder.fromHttpUrl(API_ACCOUNTS)
-                .queryParam("userId", "{userId}")
-                .encode().toUriString();
-        try {
-            Map<String, String> params = new HashMap<>();
-            params.put("userId", userId.toString());
-            restTemplate.exchange(urlTemplate, HttpMethod.DELETE, entity, String.class, params);
-        } catch (Exception e) {
-            return "redirect:/admin/accounts?error=Unable to delete account";
-        }
-
-        return "redirect:/admin/accounts";
-    }
-
 }

@@ -7,23 +7,18 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="theme-color" content="#000000">
     <meta name="description" content="Web site created using create-react-app">
-     <link rel="apple-touch-icon" href="logo192.png">
+    <link rel="apple-touch-icon" href="logo192.png">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&amp;display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400,700&amp;display=swap" rel="stylesheet">
     <link href="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-    <title>Ticket CTR</title>
+    <title>AP Movie</title>
     <link th:href="@{/css/2.fd207d57.chunk.css}" rel="stylesheet"/>
     <link th:href="@{/css/main.ffa69c8e.chunk.css}" rel="stylesheet"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" 
-    integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" 
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.3.2/swiper-bundle.css" 
-    integrity="sha512-ipO1yoQyZS3BeIuv2A8C5AwQChWt2Pi4KU3nUvXxc4TKr8QgG8dPexPAj2JGsJD6yelwKa4c7Y2he9TTkPM4Dg==" 
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body data-new-gr-c-s-check-loaded="14.1073.0" data-gr-ext-installed=""><noscript>You need to enable JavaScript to run
@@ -96,7 +91,7 @@
 									    <div class="item__movie">
 									        <div class="item__link">
 									            <div class="item__img" >
-									            			<img th:src="@{'/images/' + ${movie.smallImageURl}}" th:alt="*{smallImageURl}"/>
+									            			<img th:src="${movie.smallImageURl}" th:alt="*{smallImageURl}"/>
 									                <div class="overlay">
 									                    <div class="play__button" style="cursor: pointer;"><i
 									                            class="fa fa-play play__icon"></i></div>
@@ -133,7 +128,7 @@
 									    <div class="item__movie">
 									        <div class="item__link">
 									            <div class="item__img" >
-									            		<img th:src="@{'/images/' + ${movie.smallImageURl}}" th:alt="*{smallImageURl}"/>
+									            		<img th:src="@${movie.smallImageURl}" th:alt="*{smallImageURl}"/>
 									                <div class="overlay">
 									                    <div class="play__button" style="cursor: pointer;"><i
 									                            class="fa fa-play play__icon"></i></div>
@@ -203,7 +198,7 @@
 								                                <li class="film__item" th:each="movie: ${branch.movies}" data-length="0">
 								                                	<a class="film__link" data-toggle="collapse" th:href="'#brand'+${branch.id}+'-movie'+${movie.id}" role="button" aria-expanded="false" aria-controls="1322">
 								                                        <div class="row">
-								                                            <div class="film__img col-2"><img th:src="@{'/images/' + ${movie.smallImageURl}}" th:alt="*{smallImageURl}"/>
+								                                            <div class="film__img col-2"><img th:src="${movie.smallImageURl}" th:alt="${movie.smallImageURl}">
 								                                            </div>
 								                                            <div class="film__title col-10">
 								                                            	<span class="age--C">2D</span>

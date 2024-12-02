@@ -10,9 +10,7 @@ import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
@@ -33,13 +31,12 @@ import java.util.stream.Collectors;
 public class BillController {
     @Autowired
     private RestTemplate restTemplate;
-    public static String API_BILL= Api.baseURL+"/api/bills";
     public static String API_CREATE_BILL= Api.baseURL+"/api/bills/create-new-bill";
 
     @PostMapping
     public String displayBillPage(HttpServletRequest request, Model model){
         HttpSession session = request.getSession();
-        
+        //Lấy ra những chỗ ngồi mà khách đặt,map sang list kiểu int rồi lưu lên session
         String[] seats = request.getParameterValues("seats");
         List<Integer> listSeatIds = Arrays.stream(seats).map(seat->Integer.parseInt(seat)).collect(Collectors.toList());
         session.setAttribute("listSelectedSeatIds",listSeatIds);
@@ -103,59 +100,5 @@ public class BillController {
 
         return "redirect:/tickets/history";
     }
-    @PostMapping("/create-new-bill")
-    public String createNewBill(HttpServletRequest request, Model model,@RequestBody BookingRequestDTO bookingRequestDTO) {
-        HttpSession session = request.getSession();
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.set(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE);
-        JwtResponseDTO jwtResponseDTO = (JwtResponseDTO) session.getAttribute("jwtResponse");
-        headers.set(HttpHeaders.AUTHORIZATION, "Bearer " + jwtResponseDTO.getAccessToken());
-
-
-        model.addAttribute("user", new User());
-
-        try {
-            HttpEntity<BookingRequestDTO> entity = new HttpEntity<>(bookingRequestDTO, headers);
-            ResponseEntity<String> response = restTemplate.exchange(API_CREATE_BILL, HttpMethod.POST, entity, String.class);
-            if (response.getStatusCode() == HttpStatus.OK) {
-                return "redirect:/tickets/history";
-            } else {
-                model.addAttribute("errorMessage", response.getBody());
-                return "bill"; // or redirect to an error page
-            }
-        } catch (HttpClientErrorException ex) {
-            model.addAttribute("errorMessage", ex.getResponseBodyAsString());
-            return "bill"; // or redirect to an error page
-        }
-    }
-    @GetMapping("/pdf/{billId}")
-    public ResponseEntity<?> downloadBillPDF(@PathVariable int billId) {
-        // URL API back-end để lấy PDF
-        String url = API_BILL+"/pdf/" + billId;
-
-        // Gọi API và lấy phản hồi từ back-end
-        ResponseEntity<byte[]> response = restTemplate.exchange(
-            url,
-            HttpMethod.GET,
-            null,
-            byte[].class
-        );
-
-        // Kiểm tra phản hồi
-        if (response.getStatusCode() == HttpStatus.NOT_FOUND) {
-            return ResponseEntity.notFound().build();
-        }
-
-        // Tạo headers cho phản hồi PDF
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Content-Disposition", "inline; filename=bill_" + billId + ".pdf");
-
-        // Trả về PDF với headers và nội dung
-        return ResponseEntity
-                .ok()
-                .headers(headers)
-                .contentType(MediaType.APPLICATION_PDF)
-                .body(response.getBody());
-    }
 }

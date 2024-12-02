@@ -235,7 +235,7 @@
         
         $.ajax({
             type: "POST",
-            url: "/admin/rooms/add",
+            url: "http://localhost:8080/api/admin/rooms/add",
             headers: {"Authorization": "Bearer "+[[${session.jwtResponse.accessToken}]]},
             data: json,
             contentType: "application/json; charset=utf-8",

@@ -72,8 +72,8 @@
                                     <td th:text="${discount.isActive ? 'Yes' : 'No'}"></td>
                                     <td>
                                         <button class="btn-edit" th:data-id="${discount.id}"
-                                                style="background-color: #007bff; border-radius: 8%; color: antiquewhite;">
-                                            <i class="fa fa-wrench" aria-hidden="true"></i>
+                                                style="background-color: #4CAF50; border-radius: 8%; color: antiquewhite;">
+                                            <i class="fa fa-pencil" aria-hidden="true"></i>
                                         </button>
                                         <button class="btn-delete" th:data-id="${discount.id}"
                                                 style="background-color: #E34724; border-radius: 8%; color: antiquewhite;">
@@ -108,6 +108,7 @@
                         <label for="code">Code</label>
                         <input type="text" class="form-control" id="code" required>
                     </div>
+                    <div class="alert alert-danger d-none" id="error-message" role="alert"></div>
                     <div class="form-group">
                         <label for="description">Description</label>
                         <input type="text" class="form-control" id="description">
@@ -162,7 +163,7 @@
         $("#example").on("click", ".btn-edit", function() {
             var id = $(this).data('id');
             $.ajax({
-                url: "/admin/discounts/" + id,
+                url: "http://localhost:8080/api/admin/discounts/" + id,
                 type: 'GET',
                 headers: {
                     "Authorization": "Bearer " + [[${session.jwtResponse.accessToken}]]
@@ -183,8 +184,11 @@
             });
         });
 
-        // Save the discount (add or update)
-        $("#saveDiscountBtn").click(function() {
+        $("#saveDiscountBtn").click(function(event) {
+            // Ngăn hành vi mặc định của form (submit và reload)
+            event.preventDefault();
+
+            // Thu thập dữ liệu từ form
             var discount = {
                 code: $("#code").val(),
                 description: $("#description").val(),
@@ -195,10 +199,13 @@
                 isActive: $("#isActive").is(":checked")
             };
 
+            // Kiểm tra ID của discount để xác định xem đang thêm mới hay cập nhật
             var id = $("#discount-id").val();
             var method = id ? "PUT" : "POST";
-            var url = "/admin/discounts" + (id ? "/" + id : "");
+            var url = "http://localhost:8080/api/admin/discounts" + (id ? "/" + id : "");
 
+            // Gửi yêu cầu AJAX
+            // Gửi yêu cầu AJAX
             $.ajax({
                 url: url,
                 type: method,
@@ -208,46 +215,54 @@
                 },
                 data: JSON.stringify(discount),
                 success: function(data) {
-                    location.reload();
+                    // Nếu thành công, reload trang để cập nhật danh sách discount
+                    if (data.code === 400){
+                        alert(data.message);
+                    }else{
+                        location.reload();
+                    }
                 },
                 error: function(error) {
-                    console.log(error);
+                    // Nếu API trả về lỗi 400 (mã discount trùng)
+                    if (error.status === 400) {
+                        // Hiển thị thông báo cho người dùng bằng alert
+                        alert("Mã giảm giá đã tồn tại. Vui lòng nhập mã khác.");
+                    } else {
+                        // Xử lý các lỗi khác ngoài lỗi 400
+                        console.log(error);  // Log các lỗi khác ra console để kiểm tra
+                    }
                 }
             });
+
         });
 
-        // Handle delete
-      // Handle delete with confirmation dialog
-$("#example").on("click", ".btn-delete", function() {
-    var tag = $(this);
-    var id = tag.data('id');
 
-    // Hiển thị hộp thoại xác nhận
-    if (confirm("Are you sure you want to delete this record?")) {
-        $.ajax({
-            url: "/admin/discounts/" + id,
-            type: 'DELETE',
-            headers: {
-                "Authorization": "Bearer " + [[${session.jwtResponse.accessToken}]]
-            },
-            success: function(data) {
-                table
-                    .row(tag.parents('tr'))
-                    .remove().draw('page');
-            },
-            error: function(error) {
-                if (error.status == 200) {
+
+        // Handle delete
+        $("#example").on("click", ".btn-delete", function() {
+            var tag = $(this);
+            $.ajax({
+                url: "http://localhost:8080/api/admin/discounts/" + $(this).data('id'),
+                type: 'DELETE',
+                headers: {
+                    "Authorization": "Bearer " + [[${session.jwtResponse.accessToken}]]
+                },
+                success: function(data) {
                     table
                         .row(tag.parents('tr'))
                         .remove().draw('page');
-                } else {
-                    console.log(error);
+                },
+                error: function(error) {
+                    if (error.status == 200) {
+                        table
+                            .row(tag.parents('tr'))
+                            .remove().draw('page');
+                    } else {
+                        console.log(error)
+                    }
                 }
-            }
+            });
         });
-    }
-});
-
     });
 </script>
 </body>

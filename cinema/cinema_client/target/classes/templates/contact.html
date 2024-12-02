@@ -9,14 +9,14 @@
     <meta name="description" content="Web site created using create-react-app">
     <link rel="apple-touch-icon" href="logo192.png">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&amp;display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400,700&amp;display=swap" rel="stylesheet">
     <link href="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-    <title>Ticket CTR</title>
+    <title>AP Movie</title>
     <link th:href="@{/css/2.fd207d57.chunk.css}" rel="stylesheet"/>
     <link th:href="@{/css/main.ffa69c8e.chunk.css}" rel="stylesheet"/>
     <style type="text/css">
@@ -420,7 +420,7 @@
         // console.log("Token" + token);
 
         // Gửi yêu cầu POST đến API riêng biệt
-        fetch('/admin/feedbacks/add/' + feedbackType, {
+        fetch('http://localhost:8080/api/feedbacks/add/' + feedbackType, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -467,14 +467,14 @@
 
                     // Reset form sau khi gửi thành công
                     form.reset();
-                    alert('Comment has been sent successfully!');
+                    alert('Bình luận đã được gửi thành công!');
                 } else {
-                    alert('Unable to add comment, please try again.');
+                    alert('Không thể thêm bình luận, vui lòng thử lại.');
                 }
             })
             .catch(error => {
                 console.error('Error:', error);
-                alert('An error occurred, please try again.');
+                alert('Có lỗi xảy ra, vui lòng thử lại.');
             });
     }
 

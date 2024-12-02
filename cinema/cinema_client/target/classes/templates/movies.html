@@ -33,13 +33,13 @@
             							flex-wrap: wrap;">
                <select class="form-select" name="status" form="form-search"
                style="width:200px;font-size: 32px;color: #007aff;" >
-					<option value="" >ALL</option>
-					<option value="0" th:selected="(${status} == 0)">Now Showing</option>
-					<option value="1" th:selected="(${status} == 1)">Coming Soon</option>
+					<option value="" >Tất cả</option>
+					<option value="0" th:selected="(${status} == 0)">Sắp chiếu</option>
+					<option value="1" th:selected="(${status} == 1)">Đang chiếu</option>
 				</select>
                 <div id="wrap" style="width:500px">
                     <form id="form-search" autocomplete="on" method="post" style="display: flex">
-                    	<input id="search" name="search" type="text" placeholder="Enter the name of the movie you want to find"
+                    	<input id="search" name="search" type="text" placeholder="Nhập tên phim cần tìm"
                     	style="    max-width: 700px;
     							width: -webkit-fill-available;
    								 font-size: 40px;">

@@ -80,7 +80,7 @@ table tbody tr:hover {
         printButtons.forEach(button => {
             button.addEventListener('click', function() {
                 const billId = this.dataset.id;
-                window.open('/bill/pdf/' + billId, '_blank');
+                window.open('http://localhost:8080/api/bills/pdf/' + billId, '_blank');
             });
         });
     });
@@ -123,11 +123,9 @@ table tbody tr:hover {
 
                         <td th:text="${bill.price}"></td>
                         <td>
-                          <button class="print-btn" th:data-id="${bill.id}" 
-        style="background-color: #E34724; border-radius: 10%; color: antiquewhite; 
-               width: 45px; height: 45px; display: flex; justify-content: center; align-items: center;">
-    <i class="fas fa-file-export" aria-hidden="true" style="font-size: 1.8rem;"></i>
-</button>
+                         <button class="print-btn" th:data-id="${bill.id}" style="background-color: #E34724; border-radius: 50%; color: antiquewhite;">
+                            <i class="fas fa-print" aria-hidden="true"></i>
+                        </button>
                         </td>
                       </tr>
                     </tbody>

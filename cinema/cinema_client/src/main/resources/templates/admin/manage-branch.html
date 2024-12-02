@@ -40,14 +40,14 @@
             <div class="card rounded shadow border-0">
               <div class="card-body p-5 bg-white rounded">
               	<a class="btn btn-success" th:href="@{/admin/branches/add}" style="margin-bottom: 20px;"><i class="fa fa-plus" aria-hidden="true"></i>
-              	<span>ADD Cinema</span> </a>
+              	<span>ADD Branch</span> </a>
                 <div class="table-responsive">
                   <table id="example" style="width:100%" class="table table-striped table-bordered">
                     <thead>
                       <tr>
                         <th >ID</th>
                         <th >Location</th> 
-                        <th >Cinema Name</th>                                             
+                        <th >Branch name</th>                                             
                         <th >Address</th>                      
                         <th >Phone number</th>
                         <th >Function</th>
@@ -125,111 +125,103 @@
 
 <script th:inline="javascript">
 
-   $(document).ready(function () {
-    // Setup - add a text input to each footer cell
-    $('#example thead tr')
-        .clone(true)
-        .addClass('filters')
-        .appendTo('#example thead');
+    $(document).ready(function () {
+        // Setup - add a text input to each footer cell
+        $('#example thead tr')
+            .clone(true)
+            .addClass('filters')
+            .appendTo('#example thead');
+     
+        var table = $('#example').DataTable({
+        	autoWidth: false,
+            columnDefs: [
+                { width: 80, targets: 0 },
+                { width: 100, targets: 1 },
+                { width: 120, targets: 2 },
+                { width: 120, targets: 3 },
+                { width: 160, targets: 4 },
+                { width: 100, targets: 5 }
+              
+            ],
+            orderCellsTop: true,
+            fixedHeader: true,
+            initComplete: function () {
+                var api = this.api();
+     
+                // For each column
+                api
+                    .columns()
+                    .eq(0)
+                    .each(function (colIdx) {
+                        // Set the header cell to contain the input element
+                        var cell = $('.filters th').eq(
+                            $(api.column(colIdx).header()).index()
+                        );
+                        var title = $(cell).text();
+                        $(cell).html('<input type="text" placeholder="' + title + '" />');
+     
+                        // On every keypress in this input
+                        $(
+                            'input',
+                            $('.filters th').eq($(api.column(colIdx).header()).index())
+                        )
+                            .off('keyup change')
+                            .on('change', function (e) {
+                                // Get the search value
+                                $(this).attr('title', $(this).val());
+                                var regexr = '({search})'; //$(this).parents('th').find('select').val();
+     
+                                var cursorPosition = this.selectionStart;
+                                // Search the column for that value
+                                api
+                                    .column(colIdx)
+                                    .search(
+                                        this.value != ''
+                                            ? regexr.replace('{search}', '(((' + this.value + ')))')
+                                            : '',
+                                        this.value != '',
+                                        this.value == ''
+                                    )
+                                    .draw();
+                            })
+                            .on('keyup', function (e) {
+                                e.stopPropagation();
+     
+                                $(this).trigger('change');
+                                $(this)
+                                    .focus()[0]
+                                    .setSelectionRange(cursorPosition, cursorPosition);
+                            });
+                    });
+            },
+        });
+        $(".filters th:last-child").remove();
+        $("#example").on("click",".btn-delete",function(){
+        	var tag=$(this)
+  		  $.ajax({
+		      url: "http://localhost:8080/api/admin/branches?branchId=" + $(this).data('id'),
+		      type: 'DELETE',
+	          headers: {"Authorization": "Bearer "+[[${session.jwtResponse.accessToken}]]},   
+		      success: function (data) {
+		    	  console.log(data)
+		            table
+		            .row( tag.parents('tr') )
+		            .remove().draw('page');
+		      },
+		      error: function(error){
+                  if(error.status==200){
+                      table
+                      .row( tag.parents('tr') )
+                      .remove().draw('page');
+                  }else{
+                      console.log(error)
+                  }
+		      }
+		  }) 
 
-    var table = $('#example').DataTable({
-        autoWidth: false,
-        columnDefs: [
-            { width: 80, targets: 0 },
-            { width: 100, targets: 1 },
-            { width: 120, targets: 2 },
-            { width: 120, targets: 3 },
-            { width: 160, targets: 4 },
-            { width: 100, targets: 5 }
-        ],
-        orderCellsTop: true,
-        fixedHeader: true,
-        initComplete: function () {
-            var api = this.api();
-
-            // For each column
-            api
-                .columns()
-                .eq(0)
-                .each(function (colIdx) {
-                    // Set the header cell to contain the input element
-                    var cell = $('.filters th').eq(
-                        $(api.column(colIdx).header()).index()
-                    );
-                    var title = $(cell).text();
-                    $(cell).html('<input type="text" placeholder="' + title + '" />');
-
-                    // On every keypress in this input
-                    $(
-                        'input',
-                        $('.filters th').eq($(api.column(colIdx).header()).index())
-                    )
-                        .off('keyup change')
-                        .on('change', function (e) {
-                            // Get the search value
-                            $(this).attr('title', $(this).val());
-                            var regexr = '({search})'; //$(this).parents('th').find('select').val();
-
-                            var cursorPosition = this.selectionStart;
-                            // Search the column for that value
-                            api
-                                .column(colIdx)
-                                .search(
-                                    this.value != ''
-                                        ? regexr.replace('{search}', '(((' + this.value + ')))')
-                                        : '',
-                                    this.value != '',
-                                    this.value == ''
-                                )
-                                .draw();
-                        })
-                        .on('keyup', function (e) {
-                            e.stopPropagation();
-
-                            $(this).trigger('change');
-                            $(this)
-                                .focus()[0]
-                                .setSelectionRange(cursorPosition, cursorPosition);
-                        });
-                });
-        },
+            
+          })
     });
-
-    $(".filters th:last-child").remove();
-
-    $("#example").on("click", ".btn-delete", function () {
-        var tag = $(this);
-        var branchId = $(this).data('id');
-
-        // Confirmation dialog
-if (confirm("Are you sure you want to delete this item?")) {
-            $.ajax({
-            	url: "/admin/branches/delete?branchId=" + branchId,
-                type: 'DELETE',
-                headers: { "Authorization": "Bearer " + [[${session.jwtResponse.accessToken}]] },
-                success: function (data) {
-                    console.log(data);
-                    table
-                        .row(tag.parents('tr'))
-                        .remove().draw('page');
-                    alert("Deletion successful!");
-                },
-                error: function (error) {
-                    if (error.status == 200) {
-                        table
-                            .row(tag.parents('tr'))
-                            .remove().draw('page');
-                        alert("Deletion successful!");
-                    } else {
-                        console.log(error);
-                    }
-                }
-            });
-        } else {
-            alert("Deletion canceled.");
-        }
-    });
-});
 </script>
 
 </body>

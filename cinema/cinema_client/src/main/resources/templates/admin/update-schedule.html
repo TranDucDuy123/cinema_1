@@ -77,7 +77,7 @@
                           </th:block>
                             <option th:each="movie: ${movies}" th:value="${movie.id}" 
                              th:text="${movie.name}" th:selected="(${movie.id} == *{movie.id})"
-                              th:data-url="@{'/images/' + ${movie.smallImageURl}}"></option>
+                              th:data-url="${movie.smallImageURl}"></option>
                           </select>
             
                         </div>
@@ -109,7 +109,7 @@
                   </div>
                 </div>
                 <div class="col-md-9 col-lg-2"    >
-                  <img id="img-movie" style="height: 100%;"  th:src="@{'/images/' + ${schedule.movie.smallImageURl}}" th:alt="*{smallImageURl}"/>
+                  <img id="img-movie" style="height: 100%;"  th:src="${schedule.movie.smallImageURl}" alt="">
                 </div>
               </div>
             </div>

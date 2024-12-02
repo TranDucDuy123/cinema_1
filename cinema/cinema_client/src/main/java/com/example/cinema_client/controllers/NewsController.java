@@ -2,8 +2,6 @@ package com.example.cinema_client.controllers;
 
 import com.example.cinema_client.constants.Api;
 import com.example.cinema_client.models.NewsDTO;
-import java.util.Arrays;
-import java.util.Comparator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -22,24 +20,20 @@ public class NewsController {
     private static final String apiBaseURL = Api.baseURL + "/api/news";
 
     @GetMapping
-public String displayNewsPage(Model model) {
-    try {
-        ResponseEntity<NewsDTO[]> response = restTemplate.getForEntity(apiBaseURL + "/all-news", NewsDTO[].class);
-        if (response.getStatusCode().is2xxSuccessful()) {
-            NewsDTO[] newsDTOS = response.getBody();
-            
-            // Sort news by publishedDate in descending order
-            Arrays.sort(newsDTOS, Comparator.comparing(NewsDTO::getPublishedDate).reversed());
-
-            model.addAttribute("news", newsDTOS);
-        } else {
-            model.addAttribute("error", "Unable to fetch news");
+    public String displayNewsPage(Model model) {
+        try {
+            ResponseEntity<NewsDTO[]> response = restTemplate.getForEntity(apiBaseURL + "/all-news", NewsDTO[].class);
+            if (response.getStatusCode().is2xxSuccessful()) {
+                NewsDTO[] newsDTOS = response.getBody();
+                model.addAttribute("news", newsDTOS);
+            } else {
+                model.addAttribute("error", "Unable to fetch news");
+            }
+        } catch (Exception e) {
+            model.addAttribute("error", "An error occurred while fetching news");
         }
-    } catch (Exception e) {
-        model.addAttribute("error", "An error occurred while fetching news");
+        return "news"; // This should render a view named "news.html"
     }
-    return "news"; // This should render a view named "news.html"
-}
 
     @GetMapping("/detail")
     public String displayNewsDetail(@RequestParam("newsId") Integer newsId, Model model) {

@@ -22,27 +22,25 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active"><a aria-current="page" class="nav-link active" href="/">
-                                <div class="d-flex flex-column"><i class="mb-2 fa fa-home "></i><span>Introduce</span></div>
+                                <div class="d-flex flex-column"><i class="mb-2 fa fa-film"></i><span>Introduce</span></div>
                             </a></li>
 <!--                        <li class="nav-item active"><a aria-current="page" class="nav-link active" th:href="@{/introduce1}">-->
 <!--                            <div class="d-flex flex-column"><i class="mb-2 fa fa-film"></i><span>Feedback</span></div>-->
 <!--                        </a></li>-->
-                        <li class="nav-item"><a class="nav-link" th:href="@{/contact}">
-                            <div class="d-flex flex-column"><i class="mb-2 fa fa-address-card"></i><span>Contact</span></div>
+                        <li class="nav-item active"><a aria-current="page" class="nav-link active" th:href="@{/contact}">
+                            <div class="d-flex flex-column"><i class="mb-2 fa-regular fa-address-card"></i><span>Contact</span></div>
                         </a></li>
                         <li class="nav-item"><a class="nav-link" th:href="@{/branches}">
-                                <div class="d-flex flex-column"><i class="mb-2 fa fa-project-diagram"></i><span>Cinema Complex</span></div>
+                                <div class="d-flex flex-column"><i class="mb-2 fa fa-project-diagram"></i><span>Cinema complex</span></div>
                             </a></li>
-                         <li class="nav-item"><a class="nav-link" th:href="@{/news}">
+                         <li class="nav-item"><a aria-current="page" class="nav-link active" th:href="@{/news}">
                                 <div class="d-flex flex-column"><i class="mb-2 fa fa-newspaper"></i><span>News</span>
                                 </div>
-                               </a></li>
-                        
-                                  <li class="nav-item"><a aria-current="page" class="nav-link active" th:href="@{/movies}">
-                                <div class="d-flex flex-column"><i class="mb-2 fa fa-film"></i><span>Movie</span>
+                            </a></li>
+                        <li class="nav-item"><a aria-current="page" class="nav-link active" th:href="@{/movies}">
+                                <div class="d-flex flex-column"><i class="mb-2 fa fa-mobile"></i><span>Movie</span>
                                 </div>
                             </a></li>
-                           
                         <li class="nav-item" th:if="${session.admin}">
                         	<a aria-current="page" class="nav-link active" th:href="@{/admin}">
                                 <div class="d-flex flex-column"><i class="mb-2 fa fa-user-circle"></i>

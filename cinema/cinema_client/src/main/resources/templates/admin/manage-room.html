@@ -39,7 +39,7 @@
       color: #FFFF !important;
     }
   </style>
-  <title>Ticket CTR</title>
+  <title>Sidebar #1</title>
 </head>
 
 <body>
@@ -242,7 +242,7 @@
   }
   function callAPIDeleteRoom(){
 	  $.ajax({
-	      url: "/admin/rooms?roomId=" + $("#listRoom").find(":selected").val(),
+	      url: "http://localhost:8080/api/admin/rooms?roomId=" + $("#listRoom").find(":selected").val(),
 	      type: 'DELETE',
           headers: {"Authorization": "Bearer "+[[${session.jwtResponse.accessToken}]]},
           complete: function(mess) {
@@ -265,7 +265,7 @@
   function callAPIUpdateRoom(json){
       $.ajax({
           type: "PUT",
-          url: "/admin/rooms",
+          url: "http://localhost:8080/api/admin/rooms",
           headers: {"Authorization": "Bearer "+[[${session.jwtResponse.accessToken}]]},
           data: json,
           contentType: "application/json; charset=utf-8",

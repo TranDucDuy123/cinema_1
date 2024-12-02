@@ -202,37 +202,34 @@
                     });
             },
         });
-         $(".filters th:last-child").remove();
+        $(".filters th:last-child").remove();
+        $("#example").on("click",".btn-delete",function(){
+        	var tag=$(this)
+  		  $.ajax({
+		      url: "http://localhost:8080/api/admin/schedules?scheduleId=" + $(this).data('id'),
+		      type: 'DELETE',
+	          headers: {"Authorization": "Bearer "+[[${session.jwtResponse.accessToken}]]},   
+		      success: function (data) {
+		    	  console.log(data)
+		            table
+		            .row( tag.parents('tr') )
+		            .remove().draw('page');
+		      },
+		      error: function(error){
+                  if(error.status==200){
+                      table
+                      .row( tag.parents('tr') )
+                      .remove().draw('page');
+                  }else{
+                      console.log(error)
+                  }
+		      }
+		  }) 
 
-        $("#example").on("click", ".btn-delete", function () {
-            var tag = $(this);
-            var scheduleId = $(this).data('id');
-
-            // Hiển thị thông báo xác nhận
-            if (confirm("Are you sure you want to delete?")) {
-                $.ajax({
-                    url: "/admin/schedules/delete?scheduleId=" + scheduleId,
-                    type: 'DELETE',
-                    headers: { "Authorization": "Bearer " + [[${session.jwtResponse.accessToken}]] },
-                    success: function (data) {
-                        console.log(data);
-                        table
-                            .row(tag.parents('tr'))
-                            .remove().draw('page');
-                    },
-                    error: function (error) {
-                        if (error.status == 200) {
-                            table
-                                .row(tag.parents('tr'))
-                                .remove().draw('page');
-                        } else {
-                            console.log(error);
-                        }
-                    }
-                });
-            }
-        });
+            
+          })
     });
 </script>
+
 </body>
 </html>

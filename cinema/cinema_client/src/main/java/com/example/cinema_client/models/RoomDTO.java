@@ -1,6 +1,5 @@
 package com.example.cinema_client.models;
 
-import java.util.List;
 import lombok.Data;
 
 @Data
@@ -11,5 +10,4 @@ public class RoomDTO {
     private double totalArea;
     private String imgURL;
     private BranchDTO branch;
-    private List<SeatDTO> seats;
 }
